@@ -13,9 +13,6 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $category = new Category();
-        $category->title = "New technologies";
-        $category->url_clean = "new_tecnologies";
-        $category->save();
+        
     }
 }

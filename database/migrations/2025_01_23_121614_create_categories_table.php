@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title', 500);
             $table->string('url_clean',500)->nullable();
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
             $table->timestamps();
         });
     }

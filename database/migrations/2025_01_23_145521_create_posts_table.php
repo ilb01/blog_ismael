@@ -4,28 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+return new class extends Migration {
+    public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 500)->nullable();
-            $table->string('url_clean', 500)->nullable();
-            $table->text('content')->nullable();
+            $table->string('title', 500)->nullable(true);
+            $table->string('url_clean', 500)->unique();
+            $table->text('content');
             $table->enum('posted', ['yes', 'not'])->default('not');
-            $table->bigInteger('category_id')->unsignet()->nullable();
+            $table->string('image')->nullable();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('posts');
     }

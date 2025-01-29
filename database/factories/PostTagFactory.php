@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PostTag>
  */
-class CategoryFactory extends Factory
+class PostTagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake() -> word(),
-            'url_clean' => fake() -> word(),
+            'tag_id' => fake()->randomNumber(1,50),
+            'post_id' => fake()->randomNumber(1,50),
         ];
     }
 }
