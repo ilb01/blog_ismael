@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use App\Models\Category;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -16,12 +19,16 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $title = fake()->sentence();
+
         return [
-            'title' => fake()->word(),
-            'url_clean' => fake()->unique()->word(),
-            'content' => fake()->text(200),
-            'user_id' => fake()->randomNumber(1,10),
-            'category_id' => fake()->randomNumber(1,10)
+            'title' => $title,
+            'url_clean' => Str::slug($title),
+            'content' => fake()->randomHtml(2, 3),
+            'posted' => fake()->boolean ? 'yes' : 'not',
+            'category_id' => Category::inRandomOrder()->first()?->id,
+            'user_id' => User::inRandomOrder()->first()?->id, 
         ];
     }
 }
+

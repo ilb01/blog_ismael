@@ -5,16 +5,18 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up() {
-        Schema::create('post_tag', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('tag_id')->constrained('tags')->onDelete('cascade');
-            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('post_tags', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('post_id')->constrained()->onDelete('cascade');
+        $table->foreignId('tag_id')->constrained()->onDelete('cascade');
+        $table->timestamps();
+    });
+}
+
 
     public function down() {
-        Schema::dropIfExists('post_tag');
+        Schema::dropIfExists('post_tags');
     }
 };

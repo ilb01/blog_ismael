@@ -1,0 +1,46 @@
+{
+    "categories": {
+        "category": [
+            {
+                "name": "Tecnología",
+                "url": "tecnologia"
+            },
+            {
+                "name": "Desarrollo Web",
+                "url": "desarrollo-web"
+            },
+            {
+                "name": "Programación",
+                "url": "programacion"
+            },
+            {
+                "name": "Inteligencia Artificial",
+                "url": "inteligencia-artificial"
+            },
+            {
+                "name": "Ciberseguridad",
+                "url": "ciberseguridad"
+            },
+            {
+                "name": "Juegos",
+                "url": "juegos"
+            },
+            {
+                "name": "Startups",
+                "url": "startups"
+            },
+            {
+                "name": "Big Data",
+                "url": "big-data"
+            },
+            {
+                "name": "Cloud Computing",
+                "url": "cloud-computing"
+            },
+            {
+                "name": "Redes",
+                "url": "redes"
+            }
+        ]
+    }
+}
