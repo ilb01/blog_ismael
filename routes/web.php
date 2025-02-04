@@ -13,20 +13,32 @@ Route::get('/hello/{name}/{apellido}/{cole}/{curso}', function ($name, $apellido
             </ul>';
 });
 
-Route::get('/ourselves', function () {
-
-    })->name('ourselves');
-
 Route::get('/hello/{name}', function($name) {
     return "Hello ".$name;
     })->name('greeting');
 
-Route::get('/testing', function () {
-    return route('ourselves');
-    });
-
 Route::get('/Profile/{id}', function ($id) {
     return "Profile # <a href='".route('greeting', ['name'=>'Toni'])."' >greeting</a>".$id;
+    });
+
+Route::get('/ourprofile', function () {
+return view('ourprofile', ['name'=>'$name']);
+});
+Route::get('/ourprofile/{user}', function (App\Models\User $user) {
+    return view('ourprofile', ['user'=>$user]);
+    })->name('ourprofile');
+
+    // bueno
+// Route::get('/post/{post}', function (App\Models\Post $post) {
+//     return view('post', ['post'=>$post]);
+//     })->name('posts');
+
+    Route::get('/post', function (App\Http\Controllers\PostController   $post) {
+        return view('post', ['post'=>$post]);
+        })->name('posts');
+
+Route::get("/posts/{post:url_clean}", function (App\Models\Post $post) {
+    return $post;
     });
 
 Route::get('/hello/{name}', function ($name) {
@@ -36,7 +48,6 @@ Route::get('/hello/{name}', function ($name) {
 Route::get('/hello/{name}', function ($name) {
     return 'hello '.$name;
     })->whereAlpha('name');
-
 
 Route::get('/', function () {
     return view('welcome');
