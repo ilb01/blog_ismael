@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
  */
-class CommentFactory extends Factory
+class ImageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,8 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'comment' => fake()->text(200),
-            'user_id' => fake()->randomNumber(1, 10),
-            'post_id' =>  fake()->randomNumber(1, 50),
+            'name' => fake()->word(),
+            'comment_id' =>  fake()->randomNumber(1, 50),
         ];
     }
 }

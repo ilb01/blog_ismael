@@ -29,9 +29,9 @@ Route::get('/ourprofile/{user}', function (App\Models\User $user) {
     })->name('ourprofile');
 
     // bueno
-// Route::get('/post/{post}', function (App\Models\Post $post) {
-//     return view('post', ['post'=>$post]);
-//     })->name('posts');
+Route::get('/post/{post}', function (App\Models\Post $post) {
+    return view('post', ['post'=>$post]);
+    })->name('posts');
 
     Route::get('/post', function (App\Http\Controllers\PostController   $post) {
         return view('post', ['post'=>$post]);
@@ -41,16 +41,8 @@ Route::get("/posts/{post:url_clean}", function (App\Models\Post $post) {
     return $post;
     });
 
-Route::get('/hello/{name}', function ($name) {
-    return 'hello '.$name;
-    })->where('name', '[A-Za-z]+');
-
-Route::get('/hello/{name}', function ($name) {
-    return 'hello '.$name;
-    })->whereAlpha('name');
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('blog');
 });
 
 Route::get('/dashboard', function () {

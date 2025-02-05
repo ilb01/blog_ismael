@@ -13,7 +13,6 @@ return new class extends Migration {
             $table->string('url_clean', 500)->unique();
             $table->text('content');
             $table->enum('posted', ['yes', 'not'])->default('not');
-            $table->string('image')->nullable();
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->timestamps();
         });

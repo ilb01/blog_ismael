@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Tag;
-// use App\Models\Image;
+use App\Models\Image;
 use App\Models\Comment;
 use App\Models\PostTag;
 
@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
         });
 
         Comment::factory(50)->create();
+        Image::factory(50)->create();
         PostTag::factory(50)->create();
     }
 }
