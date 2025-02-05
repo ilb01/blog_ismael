@@ -16,7 +16,7 @@
             <!-- Header -->
             <header class="flex flex-col items-center text-center space-y-8">
                 <h1 class="text-8xl font-bold tracking-wide uppercase">Blog Ismael</h1>
-
+                <p class="text-3xl font-bold">2025</p>
                 @if (Route::has('login'))
                     <nav class="flex space-x-8">
                         @auth
