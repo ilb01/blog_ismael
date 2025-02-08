@@ -10,6 +10,14 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'url_clean',
+        'content',
+        'posted',
+        'user_id',
+        'category_id',
+    ];
     // Relación Many-to-Many con Tag M:N
     public function tags(): BelongsToMany
 {

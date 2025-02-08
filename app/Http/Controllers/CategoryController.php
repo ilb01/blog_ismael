@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('categories.create');
+        return view('categories.create_edit');
     }
 
     // En el controlador que maneja la creación de categorías
@@ -40,9 +40,8 @@ public function store(Request $request)
         $category = Category::findOrFail($id);
 
         // Retorna la vista con la categoría
-        return view('categories.edit', compact('category'));
+        return view('categories.create_edit', compact('category'));
     }
-
 
 
     public function update(Request $request, $id)

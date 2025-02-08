@@ -44,11 +44,17 @@
 </head>
 
 <body>
-    <div class="post-container">
-        <h1>Post {{$post->id}}</h1>
-        <p><strong>Title:</strong> {{$post->title}}</p>
-        <p><strong>Content:</strong> {!!$post->content!!}</p>
-        <p><strong>Posted:</strong> {{$post->created_at}}</p>
+    <div class="mt-12 w-full max-w-4xl">
+        <h2 class="text-4xl font-bold text-center text-white mb-8">Últimos Posts</h2>
+
+        @foreach ($posts as $post)
+            <div class="post-container bg-white/20 border border-gray-300/30 backdrop-blur-lg shadow-lg rounded-lg p-6 mb-6">
+                <h3 class="text-2xl font-bold text-white">Post {{ $post->id }}</h3>
+                <p class="text-xl text-yellow-300"><strong>Title:</strong> {{ $post->title }}</p>
+                <p class="text-white"><strong>Content:</strong> {!! $post->content !!}</p>
+                <p class="text-gray-300"><strong>Posted:</strong> {{ $post->created_at->format('d M Y') }}</p>
+            </div>
+        @endforeach
     </div>
 </body>
 

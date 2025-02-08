@@ -13,8 +13,10 @@ class PostController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    { {
+            $posts = Post::all();
+            return view('posts.index', compact('posts'));
+        }
     }
 
     /**
@@ -22,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        return view('posts.create_edit');
     }
 
     /**
@@ -36,6 +38,10 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->user_id = User::all()->random()->id;
         $post->save();
+        Post::create($request->all());
+
+        // Redirigir después de la creación
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -49,24 +55,41 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        // Busca la categoría por su ID
+        $post = Post::findOrFail($id);
+
+        // Retorna la vista con el post
+        return view('posts.create_edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'url_clean' => 'required|string|max:255',
+            'content' => 'required|string',
+            'posted' => 'required|in:yes,not',
+        ]);
+
+        $post = Post::findOrFail($id);
+        $post->update($validated);
+
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('posts.index')->with('success', 'Category deleted successfully.');
     }
 }
