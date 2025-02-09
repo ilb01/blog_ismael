@@ -39,15 +39,23 @@
                 </div>
 
                 <!-- Botones -->
-                <div class="flex justify-end gap-4">
+                <div class="flex flex-wrap justify-end items-center gap-6">
                     <a href="{{ route('categories.index') }}"
-                        class="inline-block bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300">Cancel</a>
+                        style="flex: 0 1 10%; text-align: center; background-color: #de364f; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 600;
+                        display: flex; align-items: center; justify-content: center; gap: 8px; transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;"
+                        onmouseout="this.style.backgroundColor='#de364f'; this.style.boxShadow='none';"
+                        onmouseover="this.style.backgroundColor='#fd1235'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.2)';">
+                        Cancel
+                    </a>
+
                     <button type="submit"
-                        class="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300 shadow-lg">
+                        style="flex: 0 1 10%; text-align: center; background-color: #4caf50; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 600;
+                        display: flex; align-items: center; justify-content: center; gap: 8px; transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;"
+                        onmouseover="this.style.backgroundColor='#388e3c'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.2)';"
+                        onmouseout="this.style.backgroundColor='#4caf50'; this.style.boxShadow='none';">
                         {{ isset($category) ? 'Update' : 'Create' }} Category
                     </button>
                 </div>
-            </div>
         </form>
     </div>
 </x-app-layout>

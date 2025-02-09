@@ -70,7 +70,7 @@
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $category->created_at }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        <div class="flex justify-center space-x-6">
+                                        <div class="flex justify-center space-x-6 gap-4">
                                             <!-- Botón de Ver (Show) -->
                                             <a href="{{ route('categories.show', $category->id) }}"
                                                 style="padding: 0.5rem 1rem; background-color: #f59e0b; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block;"
