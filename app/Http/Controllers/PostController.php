@@ -40,7 +40,7 @@ class PostController extends Controller
         $post->save();
         Post::create($request->all());
 
-        // Redirigir después de la creación
+        session()->flash('success', 'Post created successfully!');
         return redirect()->route('posts.index');
     }
 
@@ -90,6 +90,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect()->route('posts.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }
 }

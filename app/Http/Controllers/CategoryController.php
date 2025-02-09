@@ -18,20 +18,25 @@ class CategoryController extends Controller
         return view('categories.create_edit');
     }
 
+    public function show($id)
+    {
+        $category = Category::findOrFail($id); // Busca la categoría o lanza un error 404
+        return view('categories.show', compact('category')); // Retorna la vista con la categoría
+    }
+
     // En el controlador que maneja la creación de categorías
-public function store(Request $request)
-{
-    // Validación y lógica de creación de la categoría
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'url_clean' => 'required|string|max:255|unique:categories,url_clean',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'url_clean' => 'nullable|string|max:255'
+        ]);
 
-    Category::create($request->all());
+        Category::create($request->all());
 
-    // Redirigir después de la creación
-    return redirect()->route('categories.index');
-}
+        session()->flash('success', 'Category created successfully!');
+        return redirect()->route('categories.index');
+    }
 
 
     public function edit($id)
@@ -61,6 +66,7 @@ public function store(Request $request)
     {
         $category->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        session()->flash('success', 'Category deleted successfully!');
+        return redirect()->route('categories.index');
     }
 }

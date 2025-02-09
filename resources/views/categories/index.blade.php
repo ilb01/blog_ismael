@@ -4,6 +4,20 @@
             {{ __('Categories') }}
         </h2>
     </x-slot>
+    @if (session('success'))
+        <div id="success-message"
+            class="flex items-center justify-between bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-4 rounded-lg shadow-xl mb-6 animate-fade-in transition-opacity duration-500 border-l-4 border-green-900">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">✅</span>
+                <span class="font-semibold text-lg">{{ session('success') }}</span>
+            </div>
+            <button
+                onclick="document.getElementById('success-message').style.opacity='0'; setTimeout(() => document.getElementById('success-message').remove(), 500);"
+                class="focus:outline-none text-white hover:text-gray-200 transition text-xl">
+                ✖
+            </button>
+        </div>
+    @endif
 
     <div class="py-5 h-full">
         <div class="container mx-auto px-6 py-6">
@@ -39,6 +53,8 @@
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">Url
                                     Clean</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
+                                    Category Created</th>
+                                <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Actions</th>
                             </tr>
                         </thead>
@@ -52,7 +68,18 @@
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $category->url_clean }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        <div class="flex justify-center space-x-8">
+                                        {{ $category->created_at }}</td>
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                        <div class="flex justify-center space-x-6">
+                                            <!-- Botón de Ver (Show) -->
+                                            <a href="{{ route('categories.show', $category->id) }}"
+                                                style="padding: 0.5rem 1rem; background-color: #f59e0b; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block;"
+                                                onmouseover="this.style.backgroundColor='#d97706'; this.style.transform='scale(1.05)';"
+                                                onmouseout="this.style.backgroundColor='#f59e0b'; this.style.transform='scale(1)';">
+                                                👁️ Show
+                                            </a>
+
+                                            <!-- Botón de Editar (Edit) -->
                                             <a href="{{ route('categories.edit', $category->id) }}"
                                                 style="padding: 0.5rem 1rem; background-color: #3b82f6; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block;"
                                                 onmouseover="this.style.backgroundColor='#2563eb'; this.style.transform='scale(1.05)';"
@@ -60,6 +87,7 @@
                                                 ✏️ Edit
                                             </a>
 
+                                            <!-- Botón de Eliminar (Delete) -->
                                             <form action="{{ route('categories.destroy', $category->id) }}"
                                                 method="POST" style="display:inline;">
                                                 @csrf
@@ -73,6 +101,7 @@
                                             </form>
                                         </div>
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

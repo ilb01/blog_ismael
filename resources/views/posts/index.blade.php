@@ -4,7 +4,20 @@
             {{ __('Posts') }}
         </h2>
     </x-slot>
-
+    @if (session('success'))
+        <div id="success-message"
+            class="flex items-center justify-between bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-4 rounded-lg shadow-xl mb-6 animate-fade-in transition-opacity duration-500 border-l-4 border-green-900">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">✅</span>
+                <span class="font-semibold text-lg">{{ session('success') }}</span>
+            </div>
+            <button
+                onclick="document.getElementById('success-message').style.opacity='0'; setTimeout(() => document.getElementById('success-message').remove(), 500);"
+                class="focus:outline-none text-white hover:text-gray-200 transition text-xl">
+                ✖
+            </button>
+        </div>
+    @endif
     <div class="py-5 h-full">
         <div class="container mx-auto px-6 py-6">
             <div class="bg-white dark:bg-gray-900 shadow-xl sm:rounded-lg p-6 h-full flex flex-col">
