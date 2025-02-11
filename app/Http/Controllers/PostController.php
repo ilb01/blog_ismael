@@ -44,12 +44,27 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+
+        // Si hay algo en el campo de búsqueda, buscar los posts por título
+        if ($query) {
+            $posts = Post::where('title', 'like', "%{$query}%")->get();
+        } else {
+            $posts = Post::all(); // Mostrar todos los posts si no hay búsqueda
+        }
+
+        return view('blog', compact('posts'));
+    }
+
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.show', compact('post'));
     }
 
     /**
