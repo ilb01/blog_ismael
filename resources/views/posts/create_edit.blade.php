@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="container mx-auto px-6 py-6">
+    <div class="container mx-auto w-full px-6 py-6">
         <h1 class="text-3xl font-bold text-white mb-6">{{ isset($post) ? 'Edit' : 'Create' }} Post</h1>
 
         <!-- Formulario de creación y edición -->

@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Comment extends Model
 {
     use HasFactory;
-
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'comment_id');
+    }
 }

@@ -19,13 +19,13 @@
         </div>
     @endif
 
-    <div class="py-5 h-full">
+    <div class="py-5 h-full>
         <div class="container mx-auto px-6 py-6">
             <div class="bg-white dark:bg-gray-900 shadow-xl sm:rounded-lg p-6 h-full flex flex-col">
                 <div class="mb-6 flex">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 w-full">Manage Categories</h3>
                     <a href="{{ route('categories.create') }}"
-                        style="width: 10%;
+                        style="width: 20%;
                             padding: 0.75rem 1.5rem;
                             background-color: #28a745;
                             color: white;

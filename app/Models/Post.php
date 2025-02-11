@@ -20,9 +20,11 @@ class Post extends Model
     ];
     // Relación Many-to-Many con Tag M:N
     public function tags(): BelongsToMany
-{
-    return $this->belongsToMany(Tag::class, 'post_tags');
-}
-
-
+    {
+        return $this->belongsToMany(Tag::class, 'post_tags');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id');
+    }
 }

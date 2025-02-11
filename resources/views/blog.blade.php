@@ -49,7 +49,13 @@
             animation: fadeInUp 0.8s ease-in-out;
             box-shadow: 0 0 15px rgba(103, 121, 123, 0.5);
             transition: box-shadow 0.3s ease-in-out;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            padding: 20%;
+            /* Asegura espacio interno */
         }
+
 
         .card:hover {
             box-shadow: 0 0 25px rgba(105, 116, 117, 0.8);
@@ -120,13 +126,14 @@
     </header>
 
     <div class="mx-4 sm:mx-6 lg:mx-8 my-8">
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center w-full">
             <h1 class="text-4xl font-extrabold text-white mb-8 drop-shadow-2xl">
                 Últimos Posts
             </h1>
 
             <!-- Barra de búsqueda con botón -->
-            <form action="{{ route('search') }}" method="GET" class="w-full max-w-md flex items-center space-x-4 mt-6">
+            <form action="{{ route('search') }}" method="GET"
+                class="flex items-center space-x-4 mt-6 w-full max-w-md">
                 <div class="relative w-full">
                     <input type="text" name="search" placeholder="Buscar por título..."
                         class="w-full p-3 rounded-lg bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 search-input">
@@ -138,21 +145,71 @@
             </form>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6 px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 mt-6 px-6">
             @foreach ($posts as $post)
                 <div
                     class="card p-6 rounded-2xl shadow-lg bg-white/10 border border-gray-300/30 backdrop-blur-lg text-white transition-all hover:scale-105 transform hover:shadow-2xl">
+
                     <h3 class="text-3xl font-bold text-white mb-4">{{ $post->title }}</h3>
                     <p class="mt-2 text-lg text-gray-200 mb-4">{!! $post->content !!}</p>
+                    {{-- Mostrar los tags --}}
+                    @if ($post->tags->count() > 0)
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            @foreach ($post->tags as $tag)
+                                <span class="px-3 py-1 rounded-full bg-blue-600 text-white text-sm">
+                                    {{ $tag->name }}
+                                </span>
+                            @endforeach
+                        </div>
+                    @endif
                     <p class="mt-4 text-sm text-gray-300 mb-6">Publicado el: {{ $post->created_at->format('d M, Y') }}
                     </p>
-                    <a href="{{ route('posts.show', $post->id) }}"
+
+                    {{-- <a href="{{ route('posts.show', $post->id) }}"
                         class="inline-block mt-4 px-4 py-2 rounded-lg glow-button transition-all hover:bg-gray-600">
                         Leer más
-                    </a>
+                    </a> --}}
+
+                    {{-- Botón para mostrar comentarios --}}
+                    @if ($post->comments->count() > 0)
+                        <button onclick="toggleComments({{ $post->id }})"
+                            class="mt-4 px-4 py-2 rounded-lg bg-gray-700 text-white transition-all hover:bg-gray-600">
+                            Leer los comentarios
+                        </button>
+
+                        {{-- Sección de comentarios (oculta por defecto) --}}
+                        <div id="comments-{{ $post->id }}" class="mt-6 p-4 bg-gray-900/20 rounded-lg hidden">
+                            <h4 class="text-xl font-semibold text-white mb-3">Comentarios</h4>
+                            @foreach ($post->comments as $comment)
+                                <div class="mb-4 p-3 border-l-4 border-gray-500 bg-gray-800/30 rounded-lg">
+                                    {{-- Obtener el nombre del usuario utilizando el user_id --}}
+                                    @php
+                                        $user = App\Models\User::find($comment->user_id); // Obtener el usuario por user_id
+                                    @endphp
+                                    <p class="text-gray-300 text-sm mb-1"><strong>Usuario:</strong>
+                                        {{ $user->name ?? 'Anónimo' }}</p>
+                                    <p class="text-gray-200">{{ $comment->comment }}</p>
+
+                                    {{-- Mostrar imágenes asociadas a este comentario específico --}}
+                                    @foreach ($comment->images as $image)
+                                        @if ($image->comment_id === $comment->id)
+                                            <!-- Aseguramos que solo se muestren imágenes para este comentario -->
+                                            <img src="{{ asset('storage/' . $image->name) }}"
+                                                alt="Imagen del comentario" class="rounded-lg mb-4">
+                                        @endif
+                                    @endforeach
+
+                                    <p class="text-xs text-gray-400 mt-2">{{ $comment->created_at->diffForHumans() }}
+                                    </p>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             @endforeach
         </div>
+
+
     </div>
 
     <!-- Footer -->
@@ -160,5 +217,15 @@
         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
     </footer>
 </body>
+<script>
+    function toggleComments(postId) {
+        let commentsDiv = document.getElementById(`comments-${postId}`);
+        if (commentsDiv.classList.contains('hidden')) {
+            commentsDiv.classList.remove('hidden');
+        } else {
+            commentsDiv.classList.add('hidden');
+        }
+    }
+</script>
 
 </html>
