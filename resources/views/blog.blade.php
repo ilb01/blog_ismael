@@ -92,68 +92,68 @@
 </head>
 
 <body class="bg-gradient-to-r from-[#1F2937] via-[#111827] to-[#1F2937] rounded-lg shadow-lg">
-    <header class="flex flex-col items-center text-center space-y-8 mt-12">
+    <header class="flex justify-between items-center px-8 py-4 bg-transparent mb-12">
+        <!-- Título alineado a la izquierda -->
         <h1 class="text-7xl font-extrabold tracking-wide uppercase text-white drop-shadow-2xl">
             Blog Ismael
         </h1>
 
-
-
-
-        @if (Route::has('login'))
-            <nav class="flex space-x-8 mt-6">
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="relative text-white text-xl font-medium glow-text">
-                        Dashboard
-                    </a>
-                @else
-                    <a href="{{ route('login') }}" class="relative text-white text-xl font-medium glow-text">
-                        Log in
-                    </a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="relative text-white text-xl font-medium glow-text">
-                            Register
+        <!-- Navegación alineada a la derecha -->
+        <div class="flex items-center space-x-8">
+            @if (Route::has('login'))
+                <nav class="flex space-x-8">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="relative text-white text-xl font-medium glow-text">
+                            Dashboard
                         </a>
-                    @endif
-                @endauth
-            </nav>
-        @endif
-        @auth
-            <div class="relative">
-                <button id="userButton"
-                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                    <div>{{ Auth::user()->name }}</div>
-
-                    <div class="ms-1">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                </button>
-
-                <!-- Menú desplegable -->
-                <div id="dropdownMenu"
-                    class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 hidden">
-                    <div class="py-1">
-                        <a href="../"
-                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                            Profile
+                    @else
+                        <a href="{{ route('login') }}" class="relative text-white text-xl font-medium glow-text">
+                            Log in
                         </a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="relative text-white text-xl font-medium glow-text">
+                                Register
+                            </a>
+                        @endif
+                    @endauth
+                </nav>
+            @endif
 
-                        <form method="POST" action="/logout">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            @auth
+                <div class="relative">
+                    <button id="userButton"
+                        class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300">
+                        <div>{{ Auth::user()->name }}</div>
+                        <div class="ms-1">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </button>
 
-                            <button type="submit"
-                                class="block text-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                Log Out
-                            </button>
-                        </form>
+                    <!-- Menú desplegable -->
+                    <div id="dropdownMenu"
+                        class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 hidden">
+                        <div class="py-1">
+                            <a href="/profile"
+                                class="block px-4 py-2 text-right text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                Profile
+                            </a>
+
+                            <form method="POST" action="/logout">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <button type="submit"
+                                    class="block text-right w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Log Out
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endauth
+            @endauth
+        </div>
     </header>
 
     <div class="mx-4 sm:mx-6 lg:mx-8 my-8">
@@ -180,13 +180,21 @@
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 mt-6 px-6">
             @foreach ($posts as $post)
                 <div
-                    class="card p-6 rounded-3xl shadow-2xl bg-white/10 border border-gray-300/30 backdrop-blur-lg text-white transition-all hover:scale-105 transform hover:shadow-2xl hover:border-gray-400/50">
+                    class="card p-6 rounded-3xl shadow-2xl bg-white/10 border border-gray-300/30 backdrop-blur-lg text-white hover:shadow-2xl hover:border-gray-400/50">
 
                     {{-- Título del post --}}
                     <h3 class="text-4xl font-extrabold text-white mb-4">{{ $post->title }}</h3>
 
+                    {{-- Categoria del post --}}
+                    <h6>Categoria:
+                        <span
+                            class="text-sm text-white mb-2  rounded-xl  bg-gray-500 p-2 inline-block  font-semibold cursor-default">
+                            {{ $post->category ? $post->category->title : 'Sin categoría' }}
+                        </span>
+                    </h6>
+
                     {{-- Contenido del post --}}
-                    <p class= "p-2 text-lg text-gray-200 leading-relaxed ">{!! $post->content !!}</p>
+                    <p class="p-2 text-lg text-gray-200 leading-relaxed">{!! $post->content !!}</p>
 
                     {{-- Mostrar etiquetas (Tags) --}}
                     @if ($post->tags->count() > 0)
@@ -251,6 +259,7 @@
                 </div>
             @endforeach
         </div>
+
     </div>
 
     <!-- Footer -->

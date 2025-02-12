@@ -17,26 +17,6 @@ class PostController extends Controller
     { {
             $posts = Post::all();
             return view('posts.index', compact('posts'));
-            $users = DB::table('users')->where('role', '!=', 'admin')->get();
-
-            DB::table('users')->insert([
-                'id' => 2,
-                'name' => 'Marc',
-                'email' => 'Marc@example.com', // Cambié el formato del email para que sea válido.
-                'role' => 'admin'
-            ]);
-
-            $f = DB::table('users')->insert([
-                'id' => 3,
-                'name' => 'Marc',
-                'email' => 'Marc@marce.com',
-                'password' => bcrypt('12345678'),
-                'role' => 'admin'
-            ]);
-
-            $f = DB::table('users')->where('id', 1)->update(['role' => 'admin']);
-
-            $f = DB::table('users')->where('role', 'special')->delete();
         }
     }
 

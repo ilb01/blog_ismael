@@ -23,6 +23,12 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class, 'post_tags');
     }
+    // En el modelo Post
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class, 'post_id');
