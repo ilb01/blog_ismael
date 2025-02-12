@@ -56,7 +56,6 @@
             /* Asegura espacio interno */
         }
 
-
         .card:hover {
             box-shadow: 0 0 25px rgba(105, 116, 117, 0.8);
         }
@@ -74,36 +73,32 @@
             transform: scale(1.02);
         }
 
-        .glow-button {
-            background-color: #67797B;
-            /* Color de fondo inicial */
-            color: white;
-            border: 2px solid transparent;
-            border-radius: 0.5rem;
-            /* Bordes redondeados */
-            transition: all 0.3s ease;
-            /* Transición suave para todo */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .glow-button:hover {
-            color: white;
-            background-color: #525d5f;
-            /* Fondo más oscuro al pasar el ratón */
-            border: 2px solid transparent;
-            box-shadow: 0 0 25px rgba(105, 116, 117, 0.8), 0 0 35px rgba(105, 116, 117, 0.6);
-            /* Sombra más intensa */
-            transform: scale(1.05);
-            /* Aumentar ligeramente el tamaño */
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
         }
     </style>
 </head>
 
 <body class="bg-gradient-to-r from-[#1F2937] via-[#111827] to-[#1F2937] rounded-lg shadow-lg">
-
     <header class="flex flex-col items-center text-center space-y-8 mt-12">
         <h1 class="text-7xl font-extrabold tracking-wide uppercase text-white drop-shadow-2xl">
             Blog Ismael
         </h1>
+
+
+
 
         @if (Route::has('login'))
             <nav class="flex space-x-8 mt-6">
@@ -123,6 +118,42 @@
                 @endauth
             </nav>
         @endif
+        @auth
+            <div class="relative">
+                <button id="userButton"
+                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                    <div>{{ Auth::user()->name }}</div>
+
+                    <div class="ms-1">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </button>
+
+                <!-- Menú desplegable -->
+                <div id="dropdownMenu"
+                    class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 hidden">
+                    <div class="py-1">
+                        <a href="../"
+                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Profile
+                        </a>
+
+                        <form method="POST" action="/logout">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                            <button type="submit"
+                                class="block text-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                Log Out
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endauth
     </header>
 
     <div class="mx-4 sm:mx-6 lg:mx-8 my-8">
@@ -132,11 +163,12 @@
             </h1>
 
             <!-- Barra de búsqueda con botón -->
-            <form action="{{ route('search') }}" method="GET"
-                class="flex items-center space-x-4 mt-6 w-full max-w-md">
+            <form action="{{ route('search') }}" method="GET" class="flex items-center space-x-4 mt-6 w-full max-w-md"
+                onsubmit="return checkSearchInput()">
                 <div class="relative w-full">
                     <input type="text" name="search" placeholder="Buscar por título..."
-                        class="w-full p-3 rounded-lg bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 search-input">
+                        class="w-full p-3 rounded-lg bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 search-input"
+                        id="search-input">
                 </div>
                 <button type="submit"
                     class="px-6 py-3 bg-gray-400 text-white rounded-lg hover:bg-gray-500 focus:outline-none transition-all duration-300 ease-in-out transform hover:scale-105">
@@ -148,59 +180,70 @@
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 mt-6 px-6">
             @foreach ($posts as $post)
                 <div
-                    class="card p-6 rounded-2xl shadow-lg bg-white/10 border border-gray-300/30 backdrop-blur-lg text-white transition-all hover:scale-105 transform hover:shadow-2xl">
+                    class="card p-6 rounded-3xl shadow-2xl bg-white/10 border border-gray-300/30 backdrop-blur-lg text-white transition-all hover:scale-105 transform hover:shadow-2xl hover:border-gray-400/50">
 
-                    <h3 class="text-3xl font-bold text-white mb-4">{{ $post->title }}</h3>
-                    <p class="mt-2 text-lg text-gray-200 mb-4">{!! $post->content !!}</p>
-                    {{-- Mostrar los tags --}}
+                    {{-- Título del post --}}
+                    <h3 class="text-4xl font-extrabold text-white mb-4">{{ $post->title }}</h3>
+
+                    {{-- Contenido del post --}}
+                    <p class= "p-2 text-lg text-gray-200 leading-relaxed ">{!! $post->content !!}</p>
+
+                    {{-- Mostrar etiquetas (Tags) --}}
                     @if ($post->tags->count() > 0)
-                        <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex flex-wrap gap-mb-4 mt-2">
                             @foreach ($post->tags as $tag)
-                                <span class="px-3 py-1 rounded-full bg-blue-600 text-white text-sm">
+                                <span
+                                    class="px-4 py-1 rounded-xl bg-gray-500 text-white text-sm font-bold uppercase shadow-md transform transition-all hover:shadow-lg hover:scale-110 hover:bg-gray-600 hover:text-gray-300 cursor-default mr-4 mb-4">
                                     {{ $tag->name }}
                                 </span>
                             @endforeach
                         </div>
                     @endif
-                    <p class="mt-4 text-sm text-gray-300 mb-6">Publicado el: {{ $post->created_at->format('d M, Y') }}
-                    </p>
 
-                    {{-- <a href="{{ route('posts.show', $post->id) }}"
-                        class="inline-block mt-4 px-4 py-2 rounded-lg glow-button transition-all hover:bg-gray-600">
-                        Leer más
-                    </a> --}}
+                    {{-- Fecha de publicación --}}
+                    <p class="mt-5 text-sm text-gray-300 mb-3">🗓 Publicado el:
+                        {{ $post->created_at->format('d M, Y') }}</p>
 
                     {{-- Botón para mostrar comentarios --}}
                     @if ($post->comments->count() > 0)
-                        <button onclick="toggleComments({{ $post->id }})"
-                            class="mt-4 px-4 py-2 rounded-lg bg-gray-700 text-white transition-all hover:bg-gray-600">
-                            Leer los comentarios
+                        <button id="toggle-comments-btn-{{ $post->id }}"
+                            onclick="toggleComments({{ $post->id }})"
+                            class="mt-4 px-5 py-2.5 rounded-lg bg-gray-700 text-white text-lg font-semibold shadow-lg transition-all hover:bg-gray-600 hover:scale-105">
+                            💬 Leer Comentarios
                         </button>
 
                         {{-- Sección de comentarios (oculta por defecto) --}}
-                        <div id="comments-{{ $post->id }}" class="mt-6 p-4 bg-gray-900/20 rounded-lg hidden">
-                            <h4 class="text-xl font-semibold text-white mb-3">Comentarios</h4>
+                        <div id="comments-{{ $post->id }}"
+                            class="mt-6 p-5 bg-gray-900/30 border border-gray-700 rounded-lg hidden">
+                            <h4 class="text-2xl font-bold text-white mb-4">📝 Comentarios</h4>
+
                             @foreach ($post->comments as $comment)
-                                <div class="mb-4 p-3 border-l-4 border-gray-500 bg-gray-800/30 rounded-lg">
-                                    {{-- Obtener el nombre del usuario utilizando el user_id --}}
+                                <div class="mb-5 p-4 border-l-4 border-gray-500 bg-gray-800/40 rounded-lg shadow-md">
+                                    {{-- Obtener el usuario --}}
                                     @php
-                                        $user = App\Models\User::find($comment->user_id); // Obtener el usuario por user_id
+                                        $user = App\Models\User::find($comment->user_id);
                                     @endphp
-                                    <p class="text-gray-300 text-sm mb-1"><strong>Usuario:</strong>
+                                    <p class="text-gray-300 text-sm mb-2"><strong>👤 Usuario:</strong>
                                         {{ $user->name ?? 'Anónimo' }}</p>
-                                    <p class="text-gray-200">{{ $comment->comment }}</p>
+                                    <p class="text-gray-200 text-lg italic">"{{ $comment->comment }}"</p>
 
-                                    {{-- Mostrar imágenes asociadas a este comentario específico --}}
-                                    @foreach ($comment->images as $image)
-                                        @if ($image->comment_id === $comment->id)
-                                            <!-- Aseguramos que solo se muestren imágenes para este comentario -->
-                                            <img src="{{ asset('storage/' . $image->name) }}"
-                                                alt="Imagen del comentario" class="rounded-lg mb-4">
-                                        @endif
-                                    @endforeach
+                                    {{-- Mostrar imágenes asociadas al comentario --}}
+                                    @php
+                                        $commentImages = $comment->images()->where('comment_id', $comment->id)->get();
+                                    @endphp
 
-                                    <p class="text-xs text-gray-400 mt-2">{{ $comment->created_at->diffForHumans() }}
-                                    </p>
+                                    @if ($commentImages->count() > 0)
+                                        <div class="mt-3 grid grid-cols-2 gap-3">
+                                            @foreach ($commentImages as $image)
+                                                <img src="{{ asset('storage/' . $image->name) }}"
+                                                    alt="Imagen del comentario"
+                                                    class="rounded-lg shadow-lg transform hover:scale-110 transition-all duration-300 cursor-pointer">
+                                            @endforeach
+                                        </div>
+                                    @endif
+
+                                    <p class="text-xs text-gray-400 mt-3">🕒
+                                        {{ $comment->created_at->diffForHumans() }}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -208,8 +251,6 @@
                 </div>
             @endforeach
         </div>
-
-
     </div>
 
     <!-- Footer -->
@@ -217,15 +258,51 @@
         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
     </footer>
 </body>
+{{-- Script para alternar los comentarios con efecto suave --}}
 <script>
     function toggleComments(postId) {
-        let commentsDiv = document.getElementById(`comments-${postId}`);
-        if (commentsDiv.classList.contains('hidden')) {
-            commentsDiv.classList.remove('hidden');
+        const commentsSection = document.getElementById(`comments-${postId}`);
+        const toggleButton = document.getElementById(`toggle-comments-btn-${postId}`);
+
+        // Verificar si los comentarios están visibles
+        if (commentsSection.classList.contains('hidden')) {
+            // Mostrar los comentarios
+            commentsSection.classList.remove('hidden');
+            // Cambiar el texto del botón
+            toggleButton.innerHTML = 'Quitar Comentarios';
         } else {
-            commentsDiv.classList.add('hidden');
+            // Ocultar los comentarios
+            commentsSection.classList.add('hidden');
+            // Cambiar el texto del botón
+            toggleButton.innerHTML = '💬 Leer Comentarios';
         }
     }
+
+    function checkSearchInput() {
+        const searchInput = document.getElementById('search-input').value.trim();
+
+        // Si no hay texto en el campo de búsqueda, redirigir a la página principal
+        if (searchInput === "") {
+            window.location.href = "{{ url('/') }}"; // Redirigir a la página principal
+            return false;
+        }
+
+        return true;
+    }
+
+    const userButton = document.getElementById('userButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    userButton.addEventListener('click', function() {
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    // Cerrar el menú si se hace clic fuera de él
+    window.addEventListener('click', function(event) {
+        if (!userButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
 </script>
 
 </html>
