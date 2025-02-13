@@ -79,43 +79,43 @@
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->posted }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        {{ $post->category_id }}</td>
+                                        {{ $post->category->title }} ( {{$post->category_id}} )</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->user_id }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->created_at }}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        <div class="flex justify-center space-x-6 gap-4">
-                                            <!-- Botón de Ver (Show) -->
-                                            <a href="{{ route('posts.show', $post->id) }}"
-                                                style="padding: 0.5rem 1rem; background-color: #f59e0b; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block;"
-                                                onmouseover="this.style.backgroundColor='#d97706'; this.style.transform='scale(1.05)';"
-                                                onmouseout="this.style.backgroundColor='#f59e0b'; this.style.transform='scale(1)';">
-                                                👁️ Show
-                                            </a>
+                                        <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                            <div class="flex flex-col items-center space-y-6">
+                                                <!-- Botón de Ver (Show) -->
+                                                <a href="{{ route('posts.show', $post->id) }}"
+                                                    style="padding: 0.5rem 1rem; background-color: #f59e0b; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block; width: 100%;"
+                                                    onmouseover="this.style.backgroundColor='#d97706'; this.style.transform='scale(1.05)';"
+                                                    onmouseout="this.style.backgroundColor='#f59e0b'; this.style.transform='scale(1)';">
+                                                    👁️ Show
+                                                </a>
 
-                                            <!-- Botón de Editar (Edit) -->
-                                            <a href="{{ route('posts.edit', $post->id) }}"
-                                                style="padding: 0.5rem 1rem; background-color: #3b82f6; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block;"
-                                                onmouseover="this.style.backgroundColor='#2563eb'; this.style.transform='scale(1.05)';"
-                                                onmouseout="this.style.backgroundColor='#3b82f6'; this.style.transform='scale(1)';">
-                                                ✏️ Edit
-                                            </a>
+                                                <!-- Botón de Editar (Edit) -->
+                                                <a href="{{ route('posts.edit', $post->id) }}"
+                                                    style="padding: 0.5rem 1rem; background-color: #3b82f6; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block; width: 100%;"
+                                                    onmouseover="this.style.backgroundColor='#2563eb'; this.style.transform='scale(1.05)';"
+                                                    onmouseout="this.style.backgroundColor='#3b82f6'; this.style.transform='scale(1)';">
+                                                    ✏️ Edit
+                                                </a>
 
-                                            <!-- Botón de Eliminar (Delete) -->
-                                            <form action="{{ route('posts.destroy', $post->id) }}"
-                                                method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    style="padding: 0.5rem 1rem; background-color: #ef4444; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block;"
-                                                    onmouseover="this.style.backgroundColor='#dc2626'; this.style.transform='scale(1.05)';"
-                                                    onmouseout="this.style.backgroundColor='#ef4444'; this.style.transform='scale(1)';">
-                                                    🗑️ Delete
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
+                                                <!-- Botón de Eliminar (Delete) -->
+                                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline; width: 100%;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        style="padding: 0.5rem 1rem; background-color: #ef4444; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block; width: 100%;"
+                                                        onmouseover="this.style.backgroundColor='#dc2626'; this.style.transform='scale(1.05)';"
+                                                        onmouseout="this.style.backgroundColor='#ef4444'; this.style.transform='scale(1)';">
+                                                        🗑️ Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

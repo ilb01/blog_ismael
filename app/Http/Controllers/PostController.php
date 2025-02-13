@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 
@@ -24,7 +25,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create_edit');
+        // Obtén todas las categorías
+        $categories = Category::all();
+
+        // Pasa las categorías a la vista
+        return view('posts.create_edit', compact('categories'));
     }
 
     /**
@@ -81,11 +86,14 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        // Busca la post por su ID
+        // Obtén el post que se va a editar
         $post = Post::findOrFail($id);
 
-        // Retorna la vista con el post
-        return view('posts.create_edit', compact('post'));
+        // Obtén todas las categorías
+        $categories = Category::all();
+
+        // Pasa el post y las categorías a la vista
+        return view('posts.create_edit', compact('post', 'categories'));
     }
 
     /**

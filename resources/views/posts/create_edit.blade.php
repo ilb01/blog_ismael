@@ -58,11 +58,18 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="category_id" class="block text-white font-semibold">Category ID</label>
-                    <!-- Valor del campo category_id con valor de categoría en caso de edición -->
-                    <input type="text" name="category_id" id="category_id"
-                        class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('category_id', isset($post) ? $post->category_id : '') }}" required>
+                    <label for="category_id" class="block text-white font-semibold">Category</label>
+                    <select name="category_id" id="category_id"
+                        class="w-full px-4 py-2 mt-2 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                        <option value="">Select a category</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ old('category_id', isset($post) ? $post->category_id : '') == $category->id ? 'selected' : '' }}>
+                                {{ $category->title }}
+                            </option>
+                        @endforeach
+                    </select>
                     @error('category_id')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror

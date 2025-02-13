@@ -14,7 +14,7 @@
             <p class="text-lg"><span class="font-semibold">Posted:</span>
                 {{ $post->posted }}</p>
             <p class="text-lg"><span class="font-semibold">Category ID:</span>
-                {{ $post->category_id }}</p>
+                {{ $post->category->title }} ( {{$post->category_id}} )</td>
             <p class="text-lg"><span class="font-semibold">Usuario ID:</span>
                 {{ $post->user_id }}</p>
             <p class="text-lg"><span class="font-semibold">Creado el:</span>

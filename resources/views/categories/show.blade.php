@@ -8,7 +8,7 @@
             <p class="text-lg"><span class="font-semibold">ID:</span> {{ $category->id }}</p>
             <p class="text-lg"><span class="font-semibold">Title:</span> {{ $category->title }}</p>
             <p class="text-lg"><span class="font-semibold">Url Clean:</span>
-                {{ $category->url_clean ?? 'Sin descripción' }}</p>
+                {{ $category->url_clean}}</p>
             <p class="text-lg"><span class="font-semibold">Creado el:</span>
                 {{ $category->created_at->format('d/m/Y H:i') }}</p>
             <p class="text-lg"><span class="font-semibold">Última actualización:</span>

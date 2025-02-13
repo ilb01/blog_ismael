@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    <div class="py-5 h-full>
+    <div class="py-5 h-full">
         <div class="container mx-auto px-6 py-6">
             <div class="bg-white dark:bg-gray-900 shadow-xl sm:rounded-lg p-6 h-full flex flex-col">
                 <div class="mb-6 flex">
