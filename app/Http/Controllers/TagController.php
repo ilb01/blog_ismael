@@ -3,65 +3,85 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\Tag;
 
 class TagController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra una lista de etiquetas.
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view('tags.index', compact('tags'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra el formulario para crear una nueva etiqueta.
      */
     public function create()
     {
-        //
+        return view('tags.create_edit');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena una nueva etiqueta en la base de datos.
      */
-    public function store(Request $request, $postId)
+    public function store(Request $request)
     {
-        $post = Post::findOrFail($postId);
-        $post->comments()->create($request->only('content'));
-        return redirect()->route('posts.show', $postId);
+        $request->validate([
+            'name' => 'required|string|max:250',
+            'url_clean' => 'nullable|string|max:500'
+        ]);
+
+        Tag::create($request->all());
+
+        session()->flash('success', 'Tag created successfully!');
+        return redirect()->route('tags.index');
     }
 
     /**
-     * Display the specified resource.
+     * Muestra una etiqueta específica.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        return view('tags.show', compact('tag'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para editar una etiqueta.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        return view('tags.create_edit', compact('tag'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza una etiqueta en la base de datos.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:250',
+            'url_clean' => 'nullable|string|max:500',
+        ]);
+
+        $tag = Tag::findOrFail($id);
+        $tag->update($validated);
+
+        return redirect()->route('tags.index')->with('success', 'Tag updated successfully!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una etiqueta de la base de datos.
      */
-    public function destroy(string $id)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        session()->flash('success', 'Tag deleted successfully!');
+        return redirect()->route('tags.index');
     }
 }

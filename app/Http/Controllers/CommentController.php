@@ -2,63 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\User;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $comments = Comment::all();
+        return view('comments.index', compact('comments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $users = User::all();  // Obtener todos los usuarios
+        $posts = Post::all();  // Obtener todos los posts
+        return view('comments.create_edit', compact('users', 'posts'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function show($id)
+    {
+        $comment = Comment::findOrFail($id); // Busca el comentario o lanza un error 404
+        return view('comments.show', compact('comment')); // Retorna la vista con el comentario
+    }
+
+    // En el controlador que maneja la creación de comentarios
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'comment' => 'required|string|max:1000',
+            'user_id' => 'required|exists:users,id',  // Validación de que el user_id exista en la tabla users
+            'post_id' => 'required|exists:posts,id'   // Validación de que el post_id exista en la tabla posts
+        ]);
+
+
+        Comment::create($request->all());
+
+        session()->flash('success', 'Comment created successfully!');
+        return redirect()->route('comments.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $users = User::all();  // Obtener todos los usuarios
+        $posts = Post::all();  // Obtener todos los posts
+        return view('comments.create_edit', compact('comment', 'users', 'posts'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'comment' => 'required|string|max:1000',
+            'user_id' => 'required|exists:users,id',
+            'post_id' => 'required|exists:posts,id',
+        ]);
+
+        $comment = Comment::findOrFail($id);
+        $comment->update($validated);
+
+        return redirect()->route('comments.index')->with('success', 'Comment updated successfully!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Comment $comment)
     {
-        //
-    }
+        $comment->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        session()->flash('success', 'Comment deleted successfully!');
+        return redirect()->route('comments.index');
     }
 }
+

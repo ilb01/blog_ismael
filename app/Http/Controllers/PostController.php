@@ -32,18 +32,22 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StorePostRequest $request)
-    {
-        $post = new Post;
-        $post->title = $request->title;
-        $post->url_clean = $request->url_clean;
-        $post->content = $request->content;
-        $post->user_id = User::all()->random()->id;
-        $post->save();
-        Post::create($request->all());
+{
+    $post = new Post;
+    $post->title = $request->title;
+    $post->url_clean = $request->url_clean;
+    $post->content = $request->content;
 
-        session()->flash('success', 'Post created successfully!');
-        return redirect()->route('posts.index');
-    }
+    // Aquí debes usar el user_id que viene del request, o de algún valor que determines
+    $post->user_id = $request->user_id;  // Asegúrate de pasar el user_id al formulario
+
+    $post->save();
+
+    // Mensaje de éxito
+    session()->flash('success', 'Post created successfully!');
+    return redirect()->route('posts.index');
+}
+
 
     public function search(Request $request)
     {

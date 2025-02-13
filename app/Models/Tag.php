@@ -10,11 +10,16 @@ class Tag extends Model
 {
     use HasFactory;
 
-    // Relación Many-to-Many con Post M:N
+    protected $fillable = [
+        'name',
+        'url_clean',
+    ];
+
+    /**
+     * Relación Many-to-Many con Post (M:N).
+     */
     public function posts(): BelongsToMany
-{
-    return $this->belongsToMany(Post::class);
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }
-
-}
-

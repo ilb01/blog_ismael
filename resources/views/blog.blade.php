@@ -184,6 +184,13 @@
 
                     {{-- Título del post --}}
                     <h3 class="text-4xl font-extrabold text-white mb-4">{{ $post->title }}</h3>
+                    {{-- Creado por --}}
+                    <h6>Creado por:
+                        <span
+                            class="text-sm text-white mb-2 rounded-xl bg-gray-700 p-2 inline-block font-semibold cursor-default">
+                            {{ $post->user->name ?? 'Anónimo' }}
+                        </span>
+                    </h6>
 
                     {{-- Categoria del post --}}
                     <h6>Categoria:

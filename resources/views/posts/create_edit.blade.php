@@ -5,11 +5,12 @@
         </h2>
     </x-slot>
 
-    <div class="container mx-auto w-full px-6 py-6">
+    <div class="container mx-auto px-6 py-6">
         <h1 class="text-3xl font-bold text-white mb-6">{{ isset($post) ? 'Edit' : 'Create' }} Post</h1>
 
         <!-- Formulario de creación y edición -->
-        <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST">
+        <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}"
+            method="POST">
             @csrf
             @if (isset($post))
                 @method('PUT') <!-- Si estamos editando, usamos PUT -->
@@ -17,6 +18,7 @@
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
                     <label for="title" class="block text-white font-semibold">Title</label>
+                    <!-- Valor del campo title con valor de categoría en caso de edición -->
                     <input type="text" name="title" id="title"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('title', isset($post) ? $post->title : '') }}" required>
@@ -47,20 +49,14 @@
                 </div>
                 <div class="mb-4">
                     <label for="posted" class="block text-white font-semibold">Posted</label>
-                    <select name="posted" id="posted"
-                        class="w-full px-4 py-2 mt-2 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required>
-                        <option value="yes"
-                            {{ old('posted', isset($post) && $post->posted == 'yes' ? 'selected' : '') }}>yes</option>
-                        <option value="not"
-                            {{ old('posted', isset($post) && $post->posted == 'not' ? 'selected' : '') }}>not</option>
-                    </select>
+                    <!-- Valor del campo posted con valor de categoría en caso de edición -->
+                    <input type="text" name="posted" id="posted"
+                        class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        value="{{ old('posted', isset($post) ? $post->posted : '') }}" required>
                     @error('posted')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-
-
                 <div class="mb-4">
                     <label for="category_id" class="block text-white font-semibold">Category ID</label>
                     <!-- Valor del campo category_id con valor de categoría en caso de edición -->
@@ -83,15 +79,23 @@
                 </div>
 
                 <!-- Botones -->
-                <div class="flex justify-end gap-4">
+                <div class="flex flex-wrap justify-end items-center gap-6">
                     <a href="{{ route('posts.index') }}"
-                        class="inline-block bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300">Cancel</a>
+                        style="flex: 0 1 15%; text-align: center; background-color: #de364f; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 600;
+                        display: flex; align-items: center; justify-content: center; gap: 8px; transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;"
+                        onmouseout="this.style.backgroundColor='#de364f'; this.style.boxShadow='none';"
+                        onmouseover="this.style.backgroundColor='#fd1235'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.2)';">
+                        Cancel
+                    </a>
+
                     <button type="submit"
-                        class="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300 shadow-lg">
+                        style="flex: 0 1 15%; text-align: center; background-color: #4caf50; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 600;
+                        display: flex; align-items: center; justify-content: center; gap: 8px; transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;"
+                        onmouseover="this.style.backgroundColor='#388e3c'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.2)';"
+                        onmouseout="this.style.backgroundColor='#4caf50'; this.style.boxShadow='none';">
                         {{ isset($post) ? 'Update' : 'Create' }} Post
                     </button>
                 </div>
-            </div>
         </form>
     </div>
 </x-app-layout>

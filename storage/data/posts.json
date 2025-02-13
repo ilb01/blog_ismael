@@ -1,0 +1,12 @@
+{
+    "posts": {
+        "post": [
+            {
+                "id": 1,
+                "title": "Tecnología",
+                "url": "tecnologia",
+                "content":"yes"
+            }
+        ]
+    }
+}

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(CategorySeeder::class);
+        
 
         $adminUser = new User();
         $adminUser->name = "admin";

@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 Route::resource('categories', CategoryController::class);
 Route::resource('tags', TagController::class);
 Route::resource('posts', PostController::class);
-Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::resource('comments', CommentController::class);
+// Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 
 Route::get('/', function () {
