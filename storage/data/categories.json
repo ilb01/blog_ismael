@@ -40,6 +40,26 @@
             {
                 "name": "Redes",
                 "url": "redes"
+            },
+            {
+                "name": "Blockchain",
+                "url": "blockchain"
+            },
+            {
+                "name": "Desarrollo Móvil",
+                "url": "desarrollo-movil"
+            },
+            {
+                "name": "DevOps",
+                "url": "devops"
+            },
+            {
+                "name": "E-commerce",
+                "url": "e-commerce"
+            },
+            {
+                "name": "UX/UI Design",
+                "url": "ux-ui-design"
             }
         ]
     }

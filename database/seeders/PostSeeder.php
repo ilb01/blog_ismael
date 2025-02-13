@@ -16,15 +16,17 @@ class PostSeeder extends Seeder
         // Leer el JSON
         if (File::exists($jsonPath)) {
             $jsonData = File::get($jsonPath);
-            $categories = json_decode($jsonData, true);
+            $posts = json_decode($jsonData, true);
 
             // Insertar en la base de datos
-            foreach ($categories['posts']['post'] as $post) {
+            foreach ($posts['posts']['post'] as $post) {
                 Post::create([
-                    'id' => $post['id'],
-                    'title' => $post['name'],
+                    'title' => $post['title'],
                     'url_clean' => $post['url'],
                     'content' => $post['content'],
+                    'posted' => $post['posted'],
+                    'user_id'=> $post['user_id'],
+                    'category_id' => $post['category_id'],
                 ]);
             }
         } else {

@@ -28,18 +28,25 @@ class TagController extends Controller
      * Almacena una nueva etiqueta en la base de datos.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:250',
-            'url_clean' => 'nullable|string|max:500'
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:250',
+        'url_clean' => 'nullable|string|max:500', // No usamos unique aquí
+    ]);
 
-        Tag::create($request->all());
-
-        session()->flash('success', 'Tag created successfully!');
-        return redirect()->route('tags.index');
+    // Verificar si el url_clean ya existe
+    if (Tag::where('url_clean', $request->url_clean)->exists()) {
+        return redirect()->back()
+            ->withInput() // Mantener los datos del formulario
+            ->with('error', 'El valor de URL Clean ya está en uso. Por favor, elige otro.');
     }
 
+    // Si no existe, crear el registro
+    Tag::create($request->all());
+
+    session()->flash('success', 'Tag creado exitosamente!');
+    return redirect()->route('tags.index');
+}
     /**
      * Muestra una etiqueta específica.
      */

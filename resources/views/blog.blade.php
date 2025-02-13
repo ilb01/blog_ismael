@@ -219,106 +219,166 @@
                     <p class="mt-5 text-sm text-gray-300 mb-3">🗓 Publicado el:
                         {{ $post->created_at->format('d M, Y') }}</p>
 
-                    {{-- Botón para mostrar comentarios --}}
+                    <!-- Botón para mostrar/ocultar comentarios -->
                     @if ($post->comments->count() > 0)
                         <button id="toggle-comments-btn-{{ $post->id }}"
                             onclick="toggleComments({{ $post->id }})"
                             class="mt-4 px-5 py-2.5 rounded-lg bg-gray-700 text-white text-lg font-semibold shadow-lg transition-all hover:bg-gray-600 hover:scale-105">
                             💬 Leer Comentarios
                         </button>
-
-                        {{-- Sección de comentarios (oculta por defecto) --}}
-                        <div id="comments-{{ $post->id }}"
-                            class="mt-6 p-5 bg-gray-900/30 border border-gray-700 rounded-lg hidden">
-                            <h4 class="text-2xl font-bold text-white mb-4">📝 Comentarios</h4>
-
-                            @foreach ($post->comments as $comment)
-                                <div class="mb-5 p-4 border-l-4 border-gray-500 bg-gray-800/40 rounded-lg shadow-md">
-                                    {{-- Obtener el usuario --}}
-                                    @php
-                                        $user = App\Models\User::find($comment->user_id);
-                                    @endphp
-                                    <p class="text-gray-300 text-sm mb-2"><strong>👤 Usuario:</strong>
-                                        {{ $user->name ?? 'Anónimo' }}</p>
-                                    <p class="text-gray-200 text-lg italic">"{{ $comment->comment }}"</p>
-
-                                    {{-- Mostrar imágenes asociadas al comentario --}}
-                                    @php
-                                        $commentImages = $comment->images()->where('comment_id', $comment->id)->get();
-                                    @endphp
-
-                                    @if ($commentImages->count() > 0)
-                                        <div class="mt-3 grid grid-cols-2 gap-3">
-                                            @foreach ($commentImages as $image)
-                                                <img src="{{ asset('storage/' . $image->name) }}"
-                                                    alt="Imagen del comentario"
-                                                    class="rounded-lg shadow-lg transform hover:scale-110 transition-all duration-300 cursor-pointer">
-                                            @endforeach
-                                        </div>
-                                    @endif
-
-                                    <p class="text-xs text-gray-400 mt-3">🕒
-                                        {{ $comment->created_at->diffForHumans() }}</p>
-                                </div>
-                            @endforeach
-                        </div>
                     @endif
+
+                    <!-- Sección de Comentarios -->
+                    <div id="comments-{{ $post->id }}" class="{{ $post->comments->count() > 0 ? 'hidden' : '' }}">
+                        <div class="mt-8">
+                            @if ($post->comments->count() > 0)
+                                <!-- Solo muestra el título si hay comentarios -->
+                                <h4 class="text-2xl font-bold text-white mb-4">
+                                    📝
+                                    {{ $post->comments->count() === 1 ? 'Comentario' : 'Comentarios' }} (
+                                    {{ $post->comments->count() }} )
+                                </h4>
+                            @endif
+                            @if ($post->comments->count() > 0)
+                                @foreach ($post->comments as $comment)
+                                    <div
+                                        class="mb-5 p-4 border-l-4 border-gray-500 bg-gray-800/40 rounded-lg shadow-md">
+                                        <p class="text-gray-300 text-sm mb-2"><strong>👤 Usuario:</strong>
+                                            {{ $comment->user->name ?? 'Anónimo' }}</p>
+                                        <p class="text-gray-200 text-lg italic">"{{ $comment->comment }}"</p>
+
+                                        @if ($comment->images->count() > 0)
+                                            <div class="mt-3 grid grid-cols-2 gap-3">
+                                                @foreach ($comment->images as $image)
+                                                    <img src="{{ asset('storage/' . $image->name) }}"
+                                                        alt="Imagen del comentario"
+                                                        class="rounded-lg shadow-lg transform hover:scale-110 transition-all duration-300 cursor-pointer">
+                                                @endforeach
+                                            </div>
+                                        @endif
+
+                                        <p class="text-xs text-gray-400 mt-3">🕒
+                                            {{ $comment->created_at->diffForHumans() }}</p>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div
+                                    class="mt-6 p-6 bg-gray-800/40 rounded-lg border border-gray-700 shadow-lg text-center">
+                                    <p class="text-gray-300">No hay comentarios aún.</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Botón para mostrar el formulario de comentarios -->
+                    @auth
+                        <button id="toggle-form-btn-{{ $post->id }}" onclick="toggleForm({{ $post->id }})"
+                            class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out transform hover:scale-105">
+                            + Añadir Comentario
+                        </button>
+                    @else
+                        <div class="mt-6 p-6 bg-gray-800/40 rounded-lg border border-gray-700 shadow-lg text-center">
+                            <p class="text-gray-300 text-lg">
+                                Debes <a href="{{ route('login') }}"
+                                    class="text-blue-400 hover:text-blue-300 font-semibold underline">iniciar
+                                    sesión</a> para añadir un comentario.
+                            </p>
+                        </div>
+                    @endauth
+
+                    <!-- Formulario de Comentarios (oculto por defecto) -->
+                    @auth
+                        <div id="comment-form-{{ $post->id }}" class="mt-6 hidden">
+                            <form action="{{ route('comments.store', $post->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="mb-4">
+                                    <textarea name="comment" rows="3"
+                                        class="w-full p-3 rounded-lg bg-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 transition-all duration-300"
+                                        placeholder="Escribe tu comentario..." required></textarea>
+                                </div>
+                                <div class="mb-4">
+                                    <input type="file" name="images[]" multiple
+                                        class="w-full p-3 rounded-lg bg-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 transition-all duration-300">
+                                </div>
+                                <div class="flex space-x-4">
+                                    <button type="submit"
+                                        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out transform hover:scale-105">
+                                        Enviar Comentario
+                                    </button>
+                                    <button type="button" onclick="toggleForm({{ $post->id }})"
+                                        class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 ease-in-out transform hover:scale-105">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    @endauth
                 </div>
             @endforeach
         </div>
-
     </div>
 
     <!-- Footer -->
     <footer class="mt-14 text-center text-lg text-gray-400">
         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
     </footer>
-</body>
-{{-- Script para alternar los comentarios con efecto suave --}}
-<script>
-    function toggleComments(postId) {
-        const commentsSection = document.getElementById(`comments-${postId}`);
-        const toggleButton = document.getElementById(`toggle-comments-btn-${postId}`);
 
-        // Verificar si los comentarios están visibles
-        if (commentsSection.classList.contains('hidden')) {
-            // Mostrar los comentarios
-            commentsSection.classList.remove('hidden');
-            // Cambiar el texto del botón
-            toggleButton.innerHTML = 'Quitar Comentarios';
-        } else {
-            // Ocultar los comentarios
-            commentsSection.classList.add('hidden');
-            // Cambiar el texto del botón
-            toggleButton.innerHTML = '💬 Leer Comentarios';
-        }
-    }
+    <!-- Script para alternar los comentarios con efecto suave -->
+    <script>
+        // Función para alternar la visibilidad de los comentarios
+        function toggleComments(postId) {
+            const commentsSection = document.getElementById(`comments-${postId}`);
+            const toggleButton = document.getElementById(`toggle-comments-btn-${postId}`);
 
-    function checkSearchInput() {
-        const searchInput = document.getElementById('search-input').value.trim();
-
-        // Si no hay texto en el campo de búsqueda, redirigir a la página principal
-        if (searchInput === "") {
-            window.location.href = "{{ url('/') }}"; // Redirigir a la página principal
-            return false;
+            if (commentsSection.classList.contains('hidden')) {
+                commentsSection.classList.remove('hidden');
+                toggleButton.innerHTML = 'Quitar Comentarios';
+            } else {
+                commentsSection.classList.add('hidden');
+                toggleButton.innerHTML = '💬 Leer Comentarios';
+            }
         }
 
-        return true;
-    }
+        // Función para alternar la visibilidad del formulario de comentarios
+        function toggleForm(postId) {
+            const commentForm = document.getElementById(`comment-form-${postId}`);
+            const toggleFormButton = document.getElementById(`toggle-form-btn-${postId}`);
 
-    const userButton = document.getElementById('userButton');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-
-    userButton.addEventListener('click', function() {
-        dropdownMenu.classList.toggle('hidden');
-    });
-
-    // Cerrar el menú si se hace clic fuera de él
-    window.addEventListener('click', function(event) {
-        if (!userButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-            dropdownMenu.classList.add('hidden');
+            if (commentForm.classList.contains('hidden')) {
+                commentForm.classList.remove('hidden');
+                toggleFormButton.classList.add('hidden'); // Oculta el botón "Añadir Comentario"
+            } else {
+                commentForm.classList.add('hidden');
+                toggleFormButton.classList.remove('hidden'); // Muestra el botón "Añadir Comentario"
+            }
         }
-    });
-</script>
+
+        function checkSearchInput() {
+            const searchInput = document.getElementById('search-input').value.trim();
+
+            // Si no hay texto en el campo de búsqueda, redirigir a la página principal
+            if (searchInput === "") {
+                window.location.href = "{{ url('/') }}"; // Redirigir a la página principal
+                return false;
+            }
+
+            return true;
+        }
+
+        const userButton = document.getElementById('userButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        userButton.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        // Cerrar el menú si se hace clic fuera de él
+        window.addEventListener('click', function(event) {
+            if (!userButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    </script>
 
 </html>

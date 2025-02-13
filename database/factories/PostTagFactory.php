@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +19,8 @@ class PostTagFactory extends Factory
     public function definition(): array
     {
         return [
-            'tag_id' => fake()->randomNumber(1,50),
-            'post_id' => fake()->randomNumber(1,50),
+            'tag_id' => Tag::inRandomOrder()->first()?->id,
+            'post_id' => Post::inRandomOrder()->first()?->id,
         ];
     }
 }

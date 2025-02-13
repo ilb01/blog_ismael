@@ -16,12 +16,11 @@ class TagSeeder extends Seeder
         // Leer el JSON
         if (File::exists($jsonPath)) {
             $jsonData = File::get($jsonPath);
-            $categories = json_decode($jsonData, true);
+            $tags = json_decode($jsonData, true);
 
             // Insertar en la base de datos
-            foreach ($categories['tags']['tag'] as $tag) {
+            foreach ($tags['tags']['tag'] as $tag) {
                 Tag::create([
-                    'id' => $tag['id'],
                     'name' => $tag['name'],
                     'url_clean' => $tag['url'],
                 ]);

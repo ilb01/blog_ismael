@@ -2,10 +2,404 @@
     "posts": {
         "post": [
             {
-                "id": 1,
-                "title": "Tecnología",
+                "title": "La evolución de la tecnología",
                 "url": "tecnologia",
-                "content":"yes"
+                "content": "<p>La tecnología está en constante evolución, transformando nuestra forma de vivir y trabajar. Con avances en IA, Big Data, y computación cuántica, el futuro parece prometedor.</p>",
+                "posted": "yes",
+                "user_id": 4,
+                "category_id": 7
+            },
+            {
+                "title": "Desarrollo web moderno",
+                "url": "desarrollo-web",
+                "content": "<p>El desarrollo web se ha vuelto más dinámico con tecnologías como React, Vue.js y Node.js. Estas herramientas permiten crear aplicaciones rápidas y escalables.</p>",
+                "posted": "no",
+                "user_id": 6,
+                "category_id": 1
+            },
+            {
+                "title": "El futuro de la programación",
+                "url": "programacion",
+                "content": "<p>La programación sigue evolucionando con nuevos lenguajes como Rust y Go, ideales para aplicaciones de alto rendimiento. La automatización también juega un papel crucial.</p>",
+                "posted": "yes",
+                "user_id": 3,
+                "category_id": 8
+            },
+            {
+                "title": "IA y sus aplicaciones",
+                "url": "inteligencia-artificial",
+                "content": "<p>La inteligencia artificial está siendo utilizada en diversos campos, desde la medicina hasta la automoción. La capacidad de la IA para aprender y adaptarse está cambiando industrias.</p>",
+                "posted": "no",
+                "user_id": 1,
+                "category_id": 5
+            },
+            {
+                "title": "Ciberseguridad en la era digital",
+                "url": "ciberseguridad",
+                "content": "<p>La ciberseguridad es crucial para proteger la información en un mundo digital cada vez más conectado. Las amenazas están evolucionando y las soluciones deben adaptarse.</p>",
+                "posted": "yes",
+                "user_id": 9,
+                "category_id": 4
+            },
+            {
+                "title": "El impacto de los videojuegos",
+                "url": "juegos",
+                "content": "<p>Los videojuegos no solo son una forma de entretenimiento, también tienen efectos educativos y sociales. Desde simuladores hasta juegos interactivos, el impacto es amplio.</p>",
+                "posted": "no",
+                "user_id": 5,
+                "category_id": 2
+            },
+            {
+                "title": "Emprender en el mundo de las startups",
+                "url": "startups",
+                "content": "<p>Crear una startup tecnológica implica innovación, riesgos y un enfoque en soluciones disruptivas. Las startups están modelando el futuro de los negocios.</p>",
+                "posted": "yes",
+                "user_id": 7,
+                "category_id": 9
+            },
+            {
+                "title": "Big Data: El nuevo petróleo",
+                "url": "big-data",
+                "content": "<p>El análisis de Big Data permite a las empresas obtener insights valiosos. Desde predecir tendencias de consumo hasta mejorar procesos, el Big Data es una herramienta poderosa.</p>",
+                "posted": "no",
+                "user_id": 2,
+                "category_id": 6
+            },
+            {
+                "title": "Computación en la nube: Lo esencial",
+                "url": "cloud-computing",
+                "content": "<p>La computación en la nube ofrece escalabilidad y flexibilidad. Plataformas como AWS y Google Cloud están cambiando la forma en que las empresas gestionan sus recursos tecnológicos.</p>",
+                "posted": "yes",
+                "user_id": 10,
+                "category_id": 3
+            },
+            {
+                "title": "Redes: Conectando el mundo",
+                "url": "redes",
+                "content": "<p>Las redes son fundamentales en la infraestructura digital. A medida que la conectividad global mejora, también lo hacen las oportunidades de intercambio de datos en tiempo real.</p>",
+                "posted": "no",
+                "user_id": 8,
+                "category_id": 2
+            },
+            {
+                "title": "Avances en blockchain",
+                "url": "blockchain",
+                "content": "<p>La tecnología blockchain está revolucionando la forma en que gestionamos las transacciones. Con aplicaciones en finanzas, salud y más, su potencial es enorme.</p>",
+                "posted": "yes",
+                "user_id": 4,
+                "category_id": 1
+            },
+            {
+                "title": "Desarrollo de videojuegos 3D",
+                "url": "desarrollo-videojuegos-3d",
+                "content": "<p>El desarrollo de videojuegos 3D ha alcanzado nuevas alturas con motores como Unity y Unreal Engine, permitiendo experiencias inmersivas para los jugadores.</p>",
+                "posted": "no",
+                "user_id": 6,
+                "category_id": 5
+            },
+            {
+                "title": "La ética de la inteligencia artificial",
+                "url": "etica-ia",
+                "content": "<p>El rápido avance de la inteligencia artificial plantea preguntas éticas importantes sobre privacidad, empleo y la toma de decisiones automatizada.</p>",
+                "posted": "yes",
+                "user_id": 3,
+                "category_id": 7
+            },
+            {
+                "title": "El poder de la automatización",
+                "url": "automatizacion",
+                "content": "<p>La automatización está transformando industrias, desde la manufactura hasta los servicios. Robots y algoritmos están reemplazando tareas repetitivas y mejorando la eficiencia.</p>",
+                "posted": "no",
+                "user_id": 1,
+                "category_id": 4
+            },
+            {
+                "title": "Futuro de la realidad virtual",
+                "url": "realidad-virtual",
+                "content": "<p>La realidad virtual está creando nuevas formas de interacción, desde entrenamientos profesionales hasta entretenimiento. El futuro parece prometedor para esta tecnología.</p>",
+                "posted": "yes",
+                "user_id": 9,
+                "category_id": 8
+            },
+            {
+                "title": "Educación online: Tendencias",
+                "url": "educacion-online",
+                "content": "<p>La educación online ha crecido rápidamente, con plataformas como Coursera y edX ofreciendo cursos accesibles para estudiantes de todo el mundo.</p>",
+                "posted": "no",
+                "user_id": 5,
+                "category_id": 7
+            },
+            {
+                "title": "El auge de la computación cuántica",
+                "url": "computacion-cuantica",
+                "content": "<p>La computación cuántica tiene el potencial de resolver problemas complejos a una velocidad mucho mayor que las computadoras tradicionales. Empresas como IBM y Google están liderando esta carrera.</p>",
+                "posted": "yes",
+                "user_id": 7,
+                "category_id": 6
+            },
+            {
+                "title": "Programación para la web: Herramientas esenciales",
+                "url": "programacion-web",
+                "content": "<p>Conoce las herramientas esenciales para programar en la web, desde editores de texto hasta frameworks como React.js y Angular, que facilitan el desarrollo de aplicaciones web.</p>",
+                "posted": "no",
+                "user_id": 10,
+                "category_id": 1
+            },
+            {
+                "title": "El futuro del e-commerce",
+                "url": "e-commerce",
+                "content": "<p>El comercio electrónico continúa creciendo, impulsado por avances en logística, marketing digital y experiencia de usuario. Las tiendas online se están volviendo cada vez más personalizadas.</p>",
+                "posted": "yes",
+                "user_id": 2,
+                "category_id": 3
+            },
+            {
+                "title": "Impacto de 5G en las comunicaciones",
+                "url": "impacto-5g",
+                "content": "<p>La tecnología 5G promete revolucionar las comunicaciones, ofreciendo velocidades más rápidas y mayor capacidad de conexión, lo que transformará sectores como la automoción y la medicina.</p>",
+                "posted": "no",
+                "user_id": 8,
+                "category_id": 9
+            },
+            {
+                "title": "Diseño de experiencia de usuario",
+                "url": "diseno-ux",
+                "content": "<p>El diseño de experiencia de usuario (UX) se enfoca en mejorar la interacción de los usuarios con productos digitales. Un buen diseño UX puede marcar la diferencia entre el éxito y el fracaso de una app.</p>",
+                "posted": "yes",
+                "user_id": 4,
+                "category_id": 5
+            },
+            {
+                "title": "La revolución del Internet de las Cosas",
+                "url": "internet-cosas",
+                "content": "<p>El Internet de las Cosas (IoT) conecta dispositivos inteligentes, lo que permite el control remoto y la automatización. Esto está cambiando cómo interactuamos con nuestro entorno.</p>",
+                "posted": "no",
+                "user_id": 6,
+                "category_id": 8
+            },
+            {
+                "title": "El rol de los datos en el marketing digital",
+                "url": "marketing-digital",
+                "content": "<p>Los datos son fundamentales para una estrategia de marketing digital efectiva. Desde la segmentación de audiencias hasta la personalización de campañas, el análisis de datos permite decisiones más informadas.</p>",
+                "posted": "yes",
+                "user_id": 3,
+                "category_id": 1
+            },
+            {
+                "title": "El futuro de la robótica",
+                "url": "robotica",
+                "content": "<p>La robótica está avanzando rápidamente, con robots que realizan tareas complejas en industrias como la manufactura, la medicina y el servicio al cliente.</p>",
+                "posted": "no",
+                "user_id": 1,
+                "category_id": 4
+            },
+            {
+                "title": "Tendencias en diseño gráfico",
+                "url": "diseno-grafico",
+                "content": "<p>El diseño gráfico está evolucionando con nuevas tendencias en tipografía, color y composición. Los diseñadores están adoptando herramientas digitales para crear trabajos más impactantes.</p>",
+                "posted": "yes",
+                "user_id": 9,
+                "category_id": 2
+            },
+            {
+                "title": "El impacto de las redes sociales",
+                "url": "redes-sociales",
+                "content": "<p>Las redes sociales han transformado la forma en que nos comunicamos, compartimos información y consumimos contenido. Su impacto en la sociedad es profundo y continúa creciendo.</p>",
+                "posted": "no",
+                "user_id": 5,
+                "category_id": 3
+            },
+            {
+                "title": "Innovación en energías renovables",
+                "url": "energias-renovables",
+                "content": "<p>Las energías renovables están ganando terreno frente a los combustibles fósiles. Innovaciones en energía solar, eólica y de almacenamiento están impulsando un futuro más sostenible.</p>",
+                "posted": "yes",
+                "user_id": 7,
+                "category_id": 6
+            },
+            {
+                "title": "El auge de los podcasts",
+                "url": "podcasts",
+                "content": "<p>Los podcasts se han convertido en una forma popular de consumir contenido, ofreciendo una plataforma para discusiones profundas y entretenimiento en formato de audio.</p>",
+                "posted": "no",
+                "user_id": 10,
+                "category_id": 7
+            },
+            {
+                "title": "El futuro de la movilidad urbana",
+                "url": "movilidad-urbana",
+                "content": "<p>La movilidad urbana está cambiando con la adopción de vehículos eléctricos, bicicletas compartidas y sistemas de transporte inteligentes. Las ciudades están buscando soluciones más eficientes y ecológicas.</p>",
+                "posted": "yes",
+                "user_id": 2,
+                "category_id": 8
+            },
+            {
+                "title": "El papel de la biotecnología en la medicina",
+                "url": "biotecnologia",
+                "content": "<p>La biotecnología está revolucionando la medicina, permitiendo avances en tratamientos personalizados, terapias génicas y diagnóstico temprano de enfermedades.</p>",
+                "posted": "no",
+                "user_id": 8,
+                "category_id": 9
+            },
+            {
+                "title": "El crecimiento de las criptomonedas",
+                "url": "criptomonedas",
+                "content": "<p>Las criptomonedas están ganando aceptación como una forma de inversión y medio de pago. Su tecnología subyacente, blockchain, ofrece transparencia y seguridad.</p>",
+                "posted": "yes",
+                "user_id": 4,
+                "category_id": 1
+            },
+            {
+                "title": "El futuro de la impresión 3D",
+                "url": "impresion-3d",
+                "content": "<p>La impresión 3D está transformando industrias como la manufactura, la medicina y la construcción. Su capacidad para crear objetos personalizados y complejos está revolucionando la producción.</p>",
+                "posted": "no",
+                "user_id": 6,
+                "category_id": 5
+            },
+            {
+                "title": "El impacto de la realidad aumentada",
+                "url": "realidad-aumentada",
+                "content": "<p>La realidad aumentada está siendo utilizada en campos como la educación, el entretenimiento y el comercio, ofreciendo experiencias interactivas y enriquecedoras.</p>",
+                "posted": "yes",
+                "user_id": 3,
+                "category_id": 7
+            },
+            {
+                "title": "El futuro de la agricultura inteligente",
+                "url": "agricultura-inteligente",
+                "content": "<p>La agricultura inteligente utiliza tecnologías como IoT, drones y análisis de datos para optimizar la producción agrícola, reduciendo costos y mejorando la eficiencia.</p>",
+                "posted": "no",
+                "user_id": 1,
+                "category_id": 4
+            },
+            {
+                "title": "El auge de los vehículos autónomos",
+                "url": "vehiculos-autonomos",
+                "content": "<p>Los vehículos autónomos están avanzando rápidamente, prometiendo transformar la forma en que nos movemos. Empresas como Tesla y Waymo están liderando esta revolución.</p>",
+                "posted": "yes",
+                "user_id": 9,
+                "category_id": 8
+            },
+            {
+                "title": "El futuro de la educación virtual",
+                "url": "educacion-virtual",
+                "content": "<p>La educación virtual está ganando popularidad, ofreciendo flexibilidad y acceso a recursos educativos de alta calidad desde cualquier lugar del mundo.</p>",
+                "posted": "no",
+                "user_id": 5,
+                "category_id": 7
+            },
+            {
+                "title": "El impacto de la tecnología en la salud",
+                "url": "tecnologia-salud",
+                "content": "<p>La tecnología está revolucionando la salud, desde telemedicina hasta wearables que monitorean nuestra salud en tiempo real. Estos avances están mejorando la calidad de vida.</p>",
+                "posted": "yes",
+                "user_id": 7,
+                "category_id": 6
+            },
+            {
+                "title": "El futuro de la inteligencia artificial en los negocios",
+                "url": "ia-negocios",
+                "content": "<p>La inteligencia artificial está transformando los negocios, desde la automatización de procesos hasta la personalización de experiencias del cliente. Las empresas están adoptando IA para mantenerse competitivas.</p>",
+                "posted": "no",
+                "user_id": 10,
+                "category_id": 1
+            },
+            {
+                "title": "El auge de las plataformas de streaming",
+                "url": "streaming",
+                "content": "<p>Las plataformas de streaming están cambiando la forma en que consumimos contenido, ofreciendo acceso instantáneo a películas, series y música desde cualquier dispositivo.</p>",
+                "posted": "yes",
+                "user_id": 2,
+                "category_id": 3
+            },
+            {
+                "title": "El futuro de la logística automatizada",
+                "url": "logistica-automatizada",
+                "content": "<p>La logística automatizada está mejorando la eficiencia en la cadena de suministro, con robots y sistemas de gestión inteligentes que optimizan el almacenamiento y la distribución.</p>",
+                "posted": "no",
+                "user_id": 8,
+                "category_id": 9
+            },
+            {
+                "title": "El impacto de la tecnología en el arte",
+                "url": "tecnologia-arte",
+                "content": "<p>La tecnología está transformando el arte, desde la creación digital hasta la realidad virtual. Los artistas están explorando nuevas formas de expresión y conexión con su audiencia.</p>",
+                "posted": "yes",
+                "user_id": 4,
+                "category_id": 5
+            },
+            {
+                "title": "El futuro de la banca digital",
+                "url": "banca-digital",
+                "content": "<p>La banca digital está creciendo rápidamente, ofreciendo servicios financieros más accesibles y convenientes. Las fintech están liderando esta transformación.</p>",
+                "posted": "no",
+                "user_id": 6,
+                "category_id": 8
+            },
+            {
+                "title": "El auge de los asistentes virtuales",
+                "url": "asistentes-virtuales",
+                "content": "<p>Los asistentes virtuales como Siri, Alexa y Google Assistant están cambiando la forma en que interactuamos con la tecnología, ofreciendo comodidad y eficiencia en nuestras tareas diarias.</p>",
+                "posted": "yes",
+                "user_id": 3,
+                "category_id": 1
+            },
+            {
+                "title": "El futuro de la realidad mixta",
+                "url": "realidad-mixta",
+                "content": "<p>La realidad mixta combina elementos de la realidad virtual y aumentada, creando experiencias inmersivas que tienen aplicaciones en educación, entretenimiento y más.</p>",
+                "posted": "no",
+                "user_id": 1,
+                "category_id": 4
+            },
+            {
+                "title": "El impacto de la tecnología en la música",
+                "url": "tecnologia-musica",
+                "content": "<p>La tecnología ha transformado la industria musical, desde la producción hasta la distribución. Plataformas como Spotify y herramientas de edición digital están cambiando el panorama.</p>",
+                "posted": "yes",
+                "user_id": 9,
+                "category_id": 2
+            },
+            {
+                "title": "El futuro de los drones",
+                "url": "drones",
+                "content": "<p>Los drones están siendo utilizados en diversas industrias, desde la agricultura hasta la entrega de paquetes. Su versatilidad y eficiencia los convierten en una tecnología clave para el futuro.</p>",
+                "posted": "no",
+                "user_id": 5,
+                "category_id": 3
+            },
+            {
+                "title": "El auge de la inteligencia emocional en la tecnología",
+                "url": "inteligencia-emocional",
+                "content": "<p>La inteligencia emocional está siendo integrada en sistemas tecnológicos para mejorar la interacción humano-máquina, creando experiencias más naturales y empáticas.</p>",
+                "posted": "yes",
+                "user_id": 7,
+                "category_id": 6
+            },
+            {
+                "title": "El futuro de las ciudades inteligentes",
+                "url": "ciudades-inteligentes",
+                "content": "<p>Las ciudades inteligentes utilizan tecnología para mejorar la calidad de vida de sus habitantes, optimizando recursos como el transporte, la energía y la seguridad.</p>",
+                "posted": "no",
+                "user_id": 10,
+                "category_id": 7
+            },
+            {
+                "title": "El impacto de la tecnología en el deporte",
+                "url": "tecnologia-deporte",
+                "content": "<p>La tecnología está revolucionando el deporte, desde el análisis de rendimiento hasta la transmisión de eventos en vivo. Los atletas y aficionados se benefician de estas innovaciones.</p>",
+                "posted": "yes",
+                "user_id": 2,
+                "category_id": 8
+            },
+            {
+                "title": "El futuro de la nanotecnología",
+                "url": "nanotecnologia",
+                "content": "<p>La nanotecnología tiene el potencial de transformar industrias como la medicina, la energía y la manufactura, permitiendo avances en materiales y procesos a escala nanométrica.</p>",
+                "posted": "no",
+                "user_id": 8,
+                "category_id": 9
             }
         ]
     }

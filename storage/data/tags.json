@@ -2,8 +2,140 @@
     "tags": {
         "tag": [
             {
-                "name": "Tecnología",
-                "url": "tecnologia"
+                "name": "Blockchain",
+                "url": "blockchain"
+            },
+            {
+                "name": "Inteligencia Artificial",
+                "url": "inteligencia-artificial"
+            },
+            {
+                "name": "Ciberseguridad",
+                "url": "ciberseguridad"
+            },
+            {
+                "name": "Realidad Virtual",
+                "url": "realidad-virtual"
+            },
+            {
+                "name": "5G",
+                "url": "5g"
+            },
+            {
+                "name": "Desarrollo Web",
+                "url": "desarrollo-web"
+            },
+            {
+                "name": "Programación",
+                "url": "programacion"
+            },
+            {
+                "name": "Node.js",
+                "url": "nodejs"
+            },
+            {
+                "name": "React",
+                "url": "react"
+            },
+            {
+                "name": "Python",
+                "url": "python"
+            },
+            {
+                "name": "JavaScript",
+                "url": "javascript"
+            },
+            {
+                "name": "PHP",
+                "url": "php"
+            },
+            {
+                "name": "CSS",
+                "url": "css"
+            },
+            {
+                "name": "HTML",
+                "url": "html"
+            },
+            {
+                "name": "Big Data",
+                "url": "big-data"
+            },
+            {
+                "name": "Cloud Computing",
+                "url": "cloud-computing"
+            },
+            {
+                "name": "AWS",
+                "url": "aws"
+            },
+            {
+                "name": "Azure",
+                "url": "azure"
+            },
+            {
+                "name": "Machine Learning",
+                "url": "machine-learning"
+            },
+            {
+                "name": "Ciberataques",
+                "url": "ciberataques"
+            },
+            {
+                "name": "Startups",
+                "url": "startups"
+            },
+            {
+                "name": "E-commerce",
+                "url": "ecommerce"
+            },
+            {
+                "name": "Automatización",
+                "url": "automatizacion"
+            },
+            {
+                "name": "Deep Learning",
+                "url": "deep-learning"
+            },
+            {
+                "name": "Agile",
+                "url": "agile"
+            },
+            {
+                "name": "Scrum",
+                "url": "scrum"
+            },
+            {
+                "name": "API",
+                "url": "api"
+            },
+            {
+                "name": "Java",
+                "url": "java"
+            },
+            {
+                "name": "Ruby",
+                "url": "ruby"
+            },
+            {
+                "name": "Swift",
+                "url": "swift"
+            },
+            {
+                "name": "SwiftUI",
+                "url": "swiftui"
+            },
+            {
+                "name": "Kubernetes",
+                "url": "kubernetes"
+            },
+            {
+                "name": "Docker",
+                "url": "docker"
+            },
+            {
+                "name": "DevOps",
+                "url": "devops"
             }
         ]
     }

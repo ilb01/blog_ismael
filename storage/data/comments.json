@@ -2,7 +2,179 @@
     "comments": {
         "comment": [
             {
-                "comment": "Tecnología"
+                "comment": "Me encanta cómo la tecnología ha avanzado, pero a veces siento que la dependencia de los dispositivos está afectando nuestra interacción social.",
+                "user_id": 3,
+                "post_id": 12
+            },
+            {
+                "comment": "El desarrollo web siempre me ha interesado, pero la velocidad con la que cambian las tecnologías puede ser abrumadora. Es difícil mantenerse al día.",
+                "user_id": 7,
+                "post_id": 22
+            },
+            {
+                "comment": "Programar es fascinante, pero hay muchas veces que los errores son difíciles de rastrear y eso me frustra bastante.",
+                "user_id": 5,
+                "post_id": 15
+            },
+            {
+                "comment": "La inteligencia artificial promete mucho, pero me preocupa que pueda reemplazar trabajos humanos en muchas áreas, lo que afectaría a miles de personas.",
+                "user_id": 2,
+                "post_id": 5
+            },
+            {
+                "comment": "La ciberseguridad es más importante que nunca, pero a veces siento que las empresas no invierten lo suficiente en proteger los datos de los usuarios.",
+                "user_id": 8,
+                "post_id": 33
+            },
+            {
+                "comment": "Disfruto mucho jugando videojuegos, pero creo que algunos de ellos se han vuelto demasiado repetitivos y no innovan lo suficiente.",
+                "user_id": 4,
+                "post_id": 9
+            },
+            {
+                "comment": "Las startups son emocionantes, pero no todas sobreviven al primer año. A veces parece que solo un pequeño porcentaje logra tener éxito a largo plazo.",
+                "user_id": 10,
+                "post_id": 21
+            },
+            {
+                "comment": "Big Data tiene un gran potencial, pero la cantidad de datos que manejamos hoy en día puede ser abrumadora y, a menudo, se malinterpreta o se usa de manera inapropiada.",
+                "user_id": 6,
+                "post_id": 30
+            },
+            {
+                "comment": "La computación en la nube es increíble, pero la dependencia de servicios externos puede ser un problema si hay caídas o vulnerabilidades de seguridad.",
+                "user_id": 3,
+                "post_id": 42
+            },
+            {
+                "comment": "Las redes son fundamentales, pero creo que la infraestructura no siempre es tan robusta como debería, lo que genera interrupciones en momentos clave.",
+                "user_id": 1,
+                "post_id": 18
+            },
+            {
+                "comment": "Blockchain tiene un gran potencial para mejorar la transparencia y seguridad, pero aún está en una fase temprana y muchos proyectos son poco confiables.",
+                "user_id": 7,
+                "post_id": 45
+            },
+            {
+                "comment": "El desarrollo móvil está creciendo rápidamente, pero las aplicaciones pueden ser bastante pesadas y consumir una gran cantidad de recursos, lo que afecta la experiencia del usuario.",
+                "user_id": 5,
+                "post_id": 12
+            },
+            {
+                "comment": "Me parece fascinante la metodología DevOps, pero implementar esta cultura en equipos grandes puede ser un desafío debido a la resistencia al cambio.",
+                "user_id": 9,
+                "post_id": 29
+            },
+            {
+                "comment": "El comercio electrónico ha cambiado el mercado, pero los compradores no siempre tienen la mejor experiencia al navegar en tiendas online desordenadas.",
+                "user_id": 4,
+                "post_id": 19
+            },
+            {
+                "comment": "El diseño UX/UI es tan crucial para la experiencia del usuario, pero he notado que muchos diseñadores se centran más en lo estético que en la funcionalidad real.",
+                "user_id": 6,
+                "post_id": 36
+            },
+            {
+                "comment": "La ciencia de datos es fascinante, pero a veces parece que los datos pueden ser manipulados para justificar decisiones preconcebidas, lo que me preocupa.",
+                "user_id": 8,
+                "post_id": 40
+            },
+            {
+                "comment": "La robótica tiene un futuro brillante, pero me inquieta que pueda reemplazar a los trabajadores humanos en sectores donde se requieren habilidades técnicas.",
+                "user_id": 3,
+                "post_id": 26
+            },
+            {
+                "comment": "La automatización de procesos es eficiente, pero también me pregunto si está eliminando la creatividad y la intervención humana en algunas industrias.",
+                "user_id": 10,
+                "post_id": 10
+            },
+            {
+                "comment": "La arquitectura de software es esencial, pero a veces los arquitectos se enfocan demasiado en la teoría y no en las necesidades prácticas del proyecto.",
+                "user_id": 4,
+                "post_id": 6
+            },
+            {
+                "comment": "Las pruebas de software son cruciales, pero a menudo son vistas como una tarea secundaria y no se les da la importancia que realmente merecen.",
+                "user_id": 7,
+                "post_id": 25
+            },
+            {
+                "comment": "Los microservicios son geniales para la escalabilidad, pero dividir un sistema en tantos servicios puede hacer que la gestión y el monitoreo sean más complicados.",
+                "user_id": 5,
+                "post_id": 48
+            },
+            {
+                "comment": "CI/CD está revolucionando la entrega de software, pero implementar estas prácticas en equipos grandes puede ser un desafío organizacional.",
+                "user_id": 9,
+                "post_id": 11
+            },
+            {
+                "comment": "La realidad aumentada (AR) es emocionante, pero creo que aún no está completamente integrada en la vida cotidiana de las personas.",
+                "user_id": 2,
+                "post_id": 37
+            },
+            {
+                "comment": "La realidad virtual (VR) es increíble, pero todavía falta contenido realmente inmersivo que justifique la inversión en equipos caros.",
+                "user_id": 1,
+                "post_id": 32
+            },
+            {
+                "comment": "Las interfaces de usuario (UI) son fundamentales para una buena experiencia, pero muchos desarrolladores aún se enfocan más en los aspectos visuales que en la usabilidad.",
+                "user_id": 8,
+                "post_id": 27
+            },
+            {
+                "comment": "La computación cuántica tiene un enorme potencial, pero aún estamos muy lejos de ver aplicaciones prácticas en el mercado.",
+                "user_id": 6,
+                "post_id": 50
+            },
+            {
+                "comment": "Las bases de datos son fundamentales, pero la transición entre bases de datos relacionales y no relacionales puede ser difícil de gestionar en proyectos grandes.",
+                "user_id": 4,
+                "post_id": 3
+            },
+            {
+                "comment": "PHP sigue siendo útil, pero siento que ha quedado algo desactualizado con el auge de otros lenguajes más modernos.",
+                "user_id": 5,
+                "post_id": 46
+            },
+            {
+                "comment": "JavaScript es imprescindible en el desarrollo web, pero la gestión de dependencias y la carga de bibliotecas pesadas pueden afectar el rendimiento.",
+                "user_id": 2,
+                "post_id": 34
+            },
+            {
+                "comment": "Python es un lenguaje increíblemente versátil, pero la falta de tipado estricto puede llevar a errores difíciles de detectar en proyectos grandes.",
+                "user_id": 10,
+                "post_id": 2
+            },
+            {
+                "comment": "Node.js es una excelente opción para aplicaciones en tiempo real, pero su rendimiento puede verse afectado cuando se escala a aplicaciones muy grandes.",
+                "user_id": 7,
+                "post_id": 41
+            },
+            {
+                "comment": "React es excelente para crear interfaces interactivas, pero la curva de aprendizaje y la complejidad de la gestión del estado pueden ser desafiantes para los nuevos desarrolladores.",
+                "user_id": 8,
+                "post_id": 5
+            },
+            {
+                "comment": "Vue.js es bastante sencillo de aprender y utilizar, pero no tiene la misma cantidad de recursos y apoyo de la comunidad que React.",
+                "user_id": 9,
+                "post_id": 30
+            },
+            {
+                "comment": "Angular tiene muchas características, pero su complejidad y tamaño lo convierten en una opción menos atractiva para proyectos pequeños o medianos.",
+                "user_id": 1,
+                "post_id": 7
+            },
+            {
+                "comment": "Docker ha mejorado mucho el desarrollo de aplicaciones, pero a veces la configuración de contenedores puede ser un proceso largo y complicado.",
+                "user_id": 4,
+                "post_id": 17
             }
         ]
     }

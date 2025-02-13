@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
-use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\User;
 
@@ -32,21 +31,21 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StorePostRequest $request)
-{
-    $post = new Post;
-    $post->title = $request->title;
-    $post->url_clean = $request->url_clean;
-    $post->content = $request->content;
+    {
+        $post = new Post;
+        $post->title = $request->title;
+        $post->url_clean = $request->url_clean;
+        $post->content = $request->content;
 
-    // Aquí debes usar el user_id que viene del request, o de algún valor que determines
-    $post->user_id = $request->user_id;  // Asegúrate de pasar el user_id al formulario
+        // Aquí debes usar el user_id que viene del request, o de algún valor que determines
+        $post->user_id = $request->user_id;  // Asegúrate de pasar el user_id al formulario
 
-    $post->save();
+        $post->save();
 
-    // Mensaje de éxito
-    session()->flash('success', 'Post created successfully!');
-    return redirect()->route('posts.index');
-}
+        // Mensaje de éxito
+        session()->flash('success', 'Post created successfully!');
+        return redirect()->route('posts.index');
+    }
 
 
     public function search(Request $request)
@@ -68,16 +67,21 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-        return view('posts.show', compact('post'));
+        // Obtener el post con los comentarios ordenados por fecha (ascendente)
+        $post = Post::with(['comments' => function ($query) {
+            $query->orderBy('created_at', 'asc');  // Ordenar comentarios por fecha ascendente
+        }])->findOrFail($id);
+
+        return view('posts.show', compact('post'));  // Pasar el post con los comentarios ordenados a la vista
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
-        // Busca la categoría por su ID
+        // Busca la post por su ID
         $post = Post::findOrFail($id);
 
         // Retorna la vista con el post

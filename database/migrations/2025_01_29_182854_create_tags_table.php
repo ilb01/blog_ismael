@@ -9,7 +9,7 @@ return new class extends Migration {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('url_clean', 500)->unique();
+            $table->string('url_clean', 255)->unique(); // Longitud reducida a 255
             $table->timestamps();
         });
     }
