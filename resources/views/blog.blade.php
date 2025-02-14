@@ -289,9 +289,9 @@
                     <!-- Formulario de Comentarios (oculto por defecto) -->
                     @auth
                         <div id="comment-form-{{ $post->id }}" class="mt-6 hidden">
-                            <form action="{{ route('comments.store', $post->id) }}" method="POST"
-                                enctype="multipart/form-data">
+                            <form action="{{ route('comments.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="post_id" value="{{ $post->id }}">
                                 <div class="mb-4">
                                     <textarea name="comment" rows="3"
                                         class="w-full p-3 rounded-lg bg-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 transition-all duration-300"
