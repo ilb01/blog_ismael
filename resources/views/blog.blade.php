@@ -257,6 +257,7 @@
                                             </div>
                                         @endif
 
+
                                         <p class="text-xs text-gray-400 mt-3">🕒
                                             {{ $comment->created_at->diffForHumans() }}</p>
                                     </div>
@@ -292,15 +293,19 @@
                             <form action="{{ route('comments.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="post_id" value="{{ $post->id }}">
+
                                 <div class="mb-4">
                                     <textarea name="comment" rows="3"
                                         class="w-full p-3 rounded-lg bg-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 transition-all duration-300"
                                         placeholder="Escribe tu comentario..." required></textarea>
                                 </div>
+
                                 <div class="mb-4">
-                                    <input type="file" name="images[]" multiple
+                                    <input type="file" name="images[]" multiple id="image-input"
                                         class="w-full p-3 rounded-lg bg-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 transition-all duration-300">
+                                    <div id="image-preview" class="mt-3 grid grid-cols-3 gap-3"></div>
                                 </div>
+
                                 <div class="flex space-x-4">
                                     <button type="submit"
                                         class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out transform hover:scale-105">
@@ -314,6 +319,7 @@
                             </form>
                         </div>
                     @endauth
+
                 </div>
             @endforeach
         </div>
@@ -379,6 +385,21 @@
                 dropdownMenu.classList.add('hidden');
             }
         });
+        document.getElementById('image-input').addEventListener('change', function (event) {
+        const preview = document.getElementById('image-preview');
+        preview.innerHTML = ''; // Limpiar previsualización anterior
+
+        Array.from(event.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('rounded-lg', 'shadow-lg', 'w-full', 'h-24', 'object-cover');
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
     </script>
 
 </html>

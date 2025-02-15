@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ImageController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,8 @@ Route::resource('categories', CategoryController::class);
 Route::resource('tags', TagController::class);
 Route::resource('posts', PostController::class);
 Route::resource('comments', CommentController::class);
+Route::resource('images', ImageController::class);
+
 
 // Ruta específica para almacenar comentarios asociados a un post
 Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');

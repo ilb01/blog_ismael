@@ -10,8 +10,8 @@ class ImageSeeder extends Seeder
 {
     public function run()
     {
-        // Ruta absoluta al archivo JSON en Laragon
-        $jsonPath = base_path('storage/data/images.json');
+        // Ruta al archivo JSON
+        $jsonPath = storage_path('data/images.json');
 
         // Leer el JSON
         if (File::exists($jsonPath)) {
@@ -22,7 +22,7 @@ class ImageSeeder extends Seeder
             foreach ($images['images']['image'] as $image) {
                 Image::create([
                     'name' => $image['name'],
-                    'comment_id'=> $image['comment_id'],
+                    'comment_id' => $image['comment_id'],
                 ]);
             }
         } else {

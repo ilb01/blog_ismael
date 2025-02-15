@@ -1,0 +1,23 @@
+{
+    "images": {
+        "image": [
+            {
+                "name": "comments/IA.jpg",
+                "comment_id": 2
+            },
+            {
+                "name": "comments/Virtual-Reality.jpg",
+                "comment_id": 3
+            },
+            {
+                "name": "comments/BIG-TECH.jpg",
+                "comment_id": 3
+            },
+            {
+                "name": "comments/JavaScript.jpg",
+                "comment_id": 7
+            }
+        ]
+    }
+}
+
