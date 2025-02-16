@@ -21,10 +21,14 @@ class StorePostRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'title' => ['required','unique:posts', new Customlength],
+            'title' => 'required|string|max:255',
+            'url_clean' => 'nullable|string|max:255|unique:posts,url_clean',
+            'content' => 'required|string',
+            'tags' => 'nullable|array', // Asegúrate de que 'tags' sea un array
+            'tags.*' => 'exists:tags,id', // Valida que cada ID de tag exista en la base de datos
         ];
     }
     public function attibutes()
@@ -38,8 +42,8 @@ class StorePostRequest extends FormRequest
         return [
             'title.required' => "You must specify a title",
             'title.unique' => ":input already exists in your database",
-            'title.min' => "Minimusm 5 chars ". request ('title'),
-            'title.max' => "Maximsum 5 chars ". request ('title'),
+            'title.min' => "Minimusm 5 chars " . request('title'),
+            'title.max' => "Maximsum 5 chars " . request('title'),
         ];
     }
 }

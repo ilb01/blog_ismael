@@ -54,6 +54,8 @@
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Content</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
+                                    Tags</th>
+                                <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Category ID</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">User
                                     ID</th>
@@ -66,21 +68,18 @@
                         <tbody>
                             @foreach ($posts as $post)
                                 <tr class="border-b border-gray-600 hover:bg-gray-700 transition-all duration-300">
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-2 py-2 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->id }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         <div style="margin-bottom: 0.2rem;">
-                                            <!-- Margen inferior con estilos en línea -->
                                             {{ $post->title }}
                                         </div>
                                         @if ($post->posted === 'yes')
-                                            <span
-                                                style="background-color: green; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
+                                            <span style="background-color: green; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
                                                 Publicado
                                             </span>
                                         @else
-                                            <span
-                                                style="background-color: red; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
+                                            <span style="background-color: red; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
                                                 No Publicado
                                             </span>
                                         @endif
@@ -89,8 +88,15 @@
                                         {{ $post->url_clean }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {!! $post->content !!}</td>
+                                        <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                            @foreach ($post->tags as $tag)
+                                                <span class="bg-gray-500 text-white px-2 py-1 rounded-full text-sm">
+                                                    {{ $tag->name }}
+                                                </span>
+                                            @endforeach
+                                        </td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        {{ $post->category->title }} </td>
+                                        {{ $post->category->title }} ({{ $post->category_id }})</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->user_id }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">

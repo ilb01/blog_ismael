@@ -9,8 +9,7 @@
         <h1 class="text-3xl font-bold text-white mb-6">{{ isset($post) ? 'Edit' : 'Create' }} Post</h1>
 
         <!-- Formulario de creación y edición -->
-        <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}"
-            method="POST">
+        <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST">
             @csrf
             @if (isset($post))
                 @method('PUT') <!-- Si estamos editando, usamos PUT -->
@@ -49,11 +48,34 @@
                 </div>
                 <div class="mb-4">
                     <label for="posted" class="block text-white font-semibold">Posted</label>
-                    <!-- Valor del campo posted con valor de categoría en caso de edición -->
-                    <input type="text" name="posted" id="posted"
-                        class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('posted', isset($post) ? $post->posted : '') }}" required>
+                    <select name="posted" id="posted"
+                        class="w-full px-4 py-2 mt-2 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                        <option value="yes"
+                            {{ old('posted', isset($post) ? $post->posted : '') == 'yes' ? 'selected' : '' }}>Yes
+                        </option>
+                        <option value="not"
+                            {{ old('posted', isset($post) ? $post->posted : '') == 'not' ? 'selected' : '' }}>Not
+                        </option>
+                    </select>
                     @error('posted')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                <!-- Campo para los tags -->
+                <div class="mb-4">
+                    <label class="block text-white font-semibold">Tags</label>
+                    <div class="mt-2 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+                        @foreach ($allTags as $tag)
+                            <label class="inline-flex items-center bg-gray-700 px-4 py-2 rounded-lg border border-gray-600 hover:border-blue-500 transition-colors">
+                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                                    {{ in_array($tag->id, old('tags', isset($post) ? $post->tags->pluck('id')->toArray() : [])) ? 'checked' : '' }}
+                                    class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500">
+                                <span class="ml-3 text-white">{{ $tag->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                    @error('tags')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
@@ -66,7 +88,7 @@
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}"
                                 {{ old('category_id', isset($post) ? $post->category_id : '') == $category->id ? 'selected' : '' }}>
-                                {{ $category->title }}
+                                {{ $category->title }} ({{ $category->id }})
                             </option>
                         @endforeach
                     </select>
@@ -74,6 +96,7 @@
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+
                 <div class="mb-4">
                     <label for="user_id" class="block text-white font-semibold">User ID</label>
                     <!-- Valor del campo user_id con valor de categoría en caso de edición -->

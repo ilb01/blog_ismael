@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 
 class PostController extends Controller
@@ -15,7 +16,8 @@ class PostController extends Controller
      */
     public function index()
     { {
-            $posts = Post::all();
+            // $posts = Post::all();
+            $posts = Post::with('tags')->get();
             return view('posts.index', compact('posts'));
         }
     }
@@ -28,7 +30,10 @@ class PostController extends Controller
         // Obtén todas las categorías
         $categories = Category::all();
 
-        return view('posts.create_edit', compact('categories'));
+        // Obtener todos los tags disponibles
+        $allTags = Tag::all();
+
+        return view('posts.create_edit', compact('categories', 'allTags'));
     }
 
     /**
@@ -36,20 +41,26 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $post = new Post;
-        $post->title = $request->title;
-        $post->url_clean = $request->url_clean;
-        $post->content = $request->content;
+        // Validar los datos del request usando el Form Request (StorePostRequest)
+        $validatedData = $request->validated();
 
-        // Aquí debes usar el user_id que viene del request, o de algún valor que determines
-        $post->user_id = $request->user_id;
+        // Crear el post con los datos validados
+        $post = Post::create([
+            'title' => $validatedData['title'],
+            'url_clean' => $validatedData['url_clean'],
+            'content' => $validatedData['content'],
+            'posted' => $validatedData['posted'], // Asegúrate de incluir este campo
+            'user_id' => $request->user()->id, // Asignar el ID del usuario autenticado
+        ]);
 
-        $post->save();
+        // Asociar tags al post (si es necesario)
+        if ($request->has('tags')) {
+            $post->tags()->sync($request->input('tags')); // Sincronizar los tags
+        }
 
-        session()->flash('success', 'Post created successfully!');
-        return redirect()->route('posts.index');
+        // Redirigir al listado de posts con mensaje de éxito
+        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
-
 
     public function search(Request $request)
     {
@@ -89,9 +100,11 @@ class PostController extends Controller
 
         // Obtén todas las categorías
         $categories = Category::all();
+        // Obtener todos los tags disponibles
+        $allTags = Tag::all();
 
         // Pasa el post y las categorías a la vista
-        return view('posts.create_edit', compact('post', 'categories'));
+        return view('posts.create_edit', compact('post', 'categories', 'allTags'));
     }
 
     /**
@@ -99,16 +112,30 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validar los datos del formulario
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'url_clean' => 'required|string|max:255',
             'content' => 'required|string',
             'posted' => 'required|in:yes,not',
+            'tags' => 'array', // Asegúrate de que 'tags' sea un array
+            'tags.*' => 'exists:tags,id', // Verifica que cada tag exista en la base de datos
         ]);
 
+        // Buscar el post por ID
         $post = Post::findOrFail($id);
+
+        // Actualizar los campos del post
         $post->update($validated);
 
+        // Sincronizar los tags con el post
+        if ($request->has('tags')) {
+            $post->tags()->sync($request->input('tags')); // Usa sync para actualizar los tags
+        } else {
+            $post->tags()->detach(); // Si no hay tags seleccionados, eliminar todas las asociaciones
+        }
+
+        // Redirigir con mensaje de éxito
         return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
     }
 

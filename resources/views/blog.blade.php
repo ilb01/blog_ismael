@@ -321,6 +321,7 @@
                                 </form>
                             </div>
                         @endauth
+
                     </div>
                 @endif
             @endforeach
