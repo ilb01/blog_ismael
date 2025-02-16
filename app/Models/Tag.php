@@ -15,9 +15,6 @@ class Tag extends Model
         'url_clean',
     ];
 
-    /**
-     * Relación Many-to-Many con Post (M:N).
-     */
     public function posts(): BelongsToMany
     {
         return $this->belongsToMany(Post::class);

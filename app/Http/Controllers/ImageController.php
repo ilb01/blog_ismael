@@ -28,8 +28,8 @@ class ImageController extends Controller
     {
         // Validación de los datos
         $request->validate([
-            'name' => 'required|string|max:255',  // Validar el nombre de la imagen (ruta)
-            'comment_id' => 'nullable|exists:comments,id',  // Validar si el comentario existe
+            'name' => 'required|string|max:255',
+            'comment_id' => 'nullable|exists:comments,id', 
         ]);
 
         // Reemplazar las barras invertidas (\) por barras normales (/) en la ruta del nombre de la imagen
@@ -41,7 +41,7 @@ class ImageController extends Controller
             'comment_id' => $request->comment_id,  // Asociar la imagen al comentario
         ]);
 
-        // Mensaje de éxito
+
         session()->flash('success', 'Image created successfully!');
         return redirect()->route('images.index');
     }

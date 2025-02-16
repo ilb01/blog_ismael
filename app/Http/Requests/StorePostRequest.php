@@ -24,7 +24,7 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','unique:posts', new Customlength, new Myuppercase],
+            'title' => ['required','unique:posts', new Customlength],
         ];
     }
     public function attibutes()

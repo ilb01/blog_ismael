@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->string('title', 500)->nullable(true);
             $table->string('url_clean', 500)->unique();
             $table->text('content');
-            $table->enum('posted', ['yes', 'no'])->default('no');
+            $table->enum('posted', ['yes', 'not'])->default('not');
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->timestamps();
         });

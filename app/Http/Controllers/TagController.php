@@ -44,7 +44,7 @@ class TagController extends Controller
     // Si no existe, crear el registro
     Tag::create($request->all());
 
-    session()->flash('success', 'Tag creado exitosamente!');
+    session()->flash('success', 'Tag created successfully!');
     return redirect()->route('tags.index');
 }
     /**

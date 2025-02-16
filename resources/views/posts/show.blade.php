@@ -8,7 +8,7 @@
             <p class="text-lg"><span class="font-semibold">ID:</span> {{ $post->id }}</p>
             <p class="text-lg"><span class="font-semibold">Title:</span> {{ $post->title }}</p>
             <p class="text-lg"><span class="font-semibold">Url Clean:</span>
-                {{ $post->url_clean ?? 'Sin descripción' }}</p>
+                {{ $post->url_clean }}</p>
             <p class="text-lg"><span class="font-semibold">Content:</span>
                 {!! $post->content ?? 'Sin contenido' !!}</p>
             <p class="text-lg"><span class="font-semibold">Posted:</span>

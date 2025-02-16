@@ -28,7 +28,6 @@ class PostController extends Controller
         // Obtén todas las categorías
         $categories = Category::all();
 
-        // Pasa las categorías a la vista
         return view('posts.create_edit', compact('categories'));
     }
 
@@ -43,11 +42,10 @@ class PostController extends Controller
         $post->content = $request->content;
 
         // Aquí debes usar el user_id que viene del request, o de algún valor que determines
-        $post->user_id = $request->user_id;  // Asegúrate de pasar el user_id al formulario
+        $post->user_id = $request->user_id;
 
         $post->save();
 
-        // Mensaje de éxito
         session()->flash('success', 'Post created successfully!');
         return redirect()->route('posts.index');
     }
@@ -72,12 +70,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        // Obtener el post con los comentarios ordenados por fecha (ascendente)
+        // Ordenar comentarios por fecha ascendente
         $post = Post::with(['comments' => function ($query) {
-            $query->orderBy('created_at', 'asc');  // Ordenar comentarios por fecha ascendente
+            $query->orderBy('created_at', 'asc');
         }])->findOrFail($id);
 
-        return view('posts.show', compact('post'));  // Pasar el post con los comentarios ordenados a la vista
+        return view('posts.show', compact('post'));
     }
 
 

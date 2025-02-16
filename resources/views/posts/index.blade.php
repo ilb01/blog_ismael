@@ -54,13 +54,11 @@
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Content</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
-                                    Posted</th>
-                                <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Category ID</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">User
                                     ID</th>
-                                    <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
-                                        Post Created</th>
+                                <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
+                                    Post Created</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Actions</th>
                             </tr>
@@ -71,50 +69,64 @@
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->id }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        {{ $post->title }}</td>
+                                        <div style="margin-bottom: 0.2rem;">
+                                            <!-- Margen inferior con estilos en línea -->
+                                            {{ $post->title }}
+                                        </div>
+                                        @if ($post->posted === 'yes')
+                                            <span
+                                                style="background-color: green; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
+                                                Publicado
+                                            </span>
+                                        @else
+                                            <span
+                                                style="background-color: red; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
+                                                No Publicado
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->url_clean }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {!! $post->content !!}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        {{ $post->posted }}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        {{ $post->category->title }} ( {{$post->category_id}} )</td>
+                                        {{ $post->category->title }} </td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->user_id }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->created_at }}</td>
-                                        <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                            <div class="flex flex-col items-center space-y-6">
-                                                <!-- Botón de Ver (Show) -->
-                                                <a href="{{ route('posts.show', $post->id) }}"
-                                                    style="padding: 0.5rem 1rem; background-color: #f59e0b; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block; width: 100%;"
-                                                    onmouseover="this.style.backgroundColor='#d97706'; this.style.transform='scale(1.05)';"
-                                                    onmouseout="this.style.backgroundColor='#f59e0b'; this.style.transform='scale(1)';">
-                                                    👁️ Show
-                                                </a>
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                        <div class="flex flex-col items-center space-y-6">
+                                            <!-- Botón de Ver (Show) -->
+                                            <a href="{{ route('posts.show', $post->id) }}"
+                                                style="padding: 0.5rem 1rem; background-color: #f59e0b; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block; width: 100%;"
+                                                onmouseover="this.style.backgroundColor='#d97706'; this.style.transform='scale(1.05)';"
+                                                onmouseout="this.style.backgroundColor='#f59e0b'; this.style.transform='scale(1)';">
+                                                👁️ Show
+                                            </a>
 
-                                                <!-- Botón de Editar (Edit) -->
-                                                <a href="{{ route('posts.edit', $post->id) }}"
-                                                    style="padding: 0.5rem 1rem; background-color: #3b82f6; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block; width: 100%;"
-                                                    onmouseover="this.style.backgroundColor='#2563eb'; this.style.transform='scale(1.05)';"
-                                                    onmouseout="this.style.backgroundColor='#3b82f6'; this.style.transform='scale(1)';">
-                                                    ✏️ Edit
-                                                </a>
+                                            <!-- Botón de Editar (Edit) -->
+                                            <a href="{{ route('posts.edit', $post->id) }}"
+                                                style="padding: 0.5rem 1rem; background-color: #3b82f6; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block; width: 100%;"
+                                                onmouseover="this.style.backgroundColor='#2563eb'; this.style.transform='scale(1.05)';"
+                                                onmouseout="this.style.backgroundColor='#3b82f6'; this.style.transform='scale(1)';">
+                                                ✏️ Edit
+                                            </a>
 
-                                                <!-- Botón de Eliminar (Delete) -->
-                                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline; width: 100%;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        style="padding: 0.5rem 1rem; background-color: #ef4444; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block; width: 100%;"
-                                                        onmouseover="this.style.backgroundColor='#dc2626'; this.style.transform='scale(1.05)';"
-                                                        onmouseout="this.style.backgroundColor='#ef4444'; this.style.transform='scale(1)';">
-                                                        🗑️ Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
+                                            <!-- Botón de Eliminar (Delete) -->
+                                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                                style="display:inline; width: 100%;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    style="padding: 0.5rem 1rem; background-color: #ef4444; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block; width: 100%;"
+                                                    onmouseover="this.style.backgroundColor='#dc2626'; this.style.transform='scale(1.05)';"
+                                                    onmouseout="this.style.backgroundColor='#ef4444'; this.style.transform='scale(1)';">
+                                                    🗑️ Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
 
                                 </tr>
                             @endforeach
