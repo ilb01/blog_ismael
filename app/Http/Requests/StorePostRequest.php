@@ -24,11 +24,13 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255',
-            'url_clean' => 'nullable|string|max:255|unique:posts,url_clean',
+            'title' => 'required|string|max:500',
+            'url_clean' => 'required|string|max:500|unique:posts,url_clean,',
             'content' => 'required|string',
-            'tags' => 'nullable|array', // Asegúrate de que 'tags' sea un array
-            'tags.*' => 'exists:tags,id', // Valida que cada ID de tag exista en la base de datos
+            'posted' => 'required|in:yes,not',
+            'category_id' => 'required|exists:categories,id', // Asegúrate de que exista en la tabla categories
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ];
     }
     public function attibutes()

@@ -51,6 +51,7 @@ class PostController extends Controller
             'content' => $validatedData['content'],
             'posted' => $validatedData['posted'], // Asegúrate de incluir este campo
             'user_id' => $request->user()->id, // Asignar el ID del usuario autenticado
+            'category_id' => $validatedData['category_id'],
         ]);
 
         // Asociar tags al post (si es necesario)
@@ -118,6 +119,7 @@ class PostController extends Controller
             'url_clean' => 'required|string|max:255',
             'content' => 'required|string',
             'posted' => 'required|in:yes,not',
+            'category_id' => 'required|exists:categories,id', // Validar que category_id exista
             'tags' => 'array', // Asegúrate de que 'tags' sea un array
             'tags.*' => 'exists:tags,id', // Verifica que cada tag exista en la base de datos
         ]);

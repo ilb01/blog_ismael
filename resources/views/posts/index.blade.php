@@ -88,13 +88,13 @@
                                         {{ $post->url_clean }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {!! $post->content !!}</td>
-                                        <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                            @foreach ($post->tags as $tag)
-                                                <span class="bg-gray-500 text-white px-2 py-1 rounded-full text-sm">
-                                                    {{ $tag->name }}
-                                                </span>
-                                            @endforeach
-                                        </td>
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                        @foreach ($post->tags as $tag)
+                                            <span class="bg-gray-500 text-white px-2 py-1 rounded-full text-sm">
+                                                {{ $tag->name }}
+                                            </span>
+                                        @endforeach
+                                    </td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->category->title }} ({{ $post->category_id }})</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">

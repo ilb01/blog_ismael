@@ -5,24 +5,46 @@
         </h1>
 
         <div class="bg-gray-100 p-4 rounded-lg shadow">
-            <p class="text-lg"><span class="font-semibold">ID:</span> {{ $post->id }}</p>
-            <p class="text-lg"><span class="font-semibold">Title:</span> {{ $post->title }}</p>
-            <p class="text-lg"><span class="font-semibold">Url Clean:</span>
-                {{ $post->url_clean }}</p>
-            <p class="text-lg"><span class="font-semibold">Content:</span>
-                {!! $post->content ?? 'Sin contenido' !!}</p>
-            <p class="text-lg"><span class="font-semibold">Posted:</span>
-                {{ $post->posted }}</p>
-            <p class="text-lg"><span class="font-semibold">Category ID:</span>
-                {{ $post->category->title }} ( {{$post->category_id}} )</td>
-            <p class="text-lg"><span class="font-semibold">Usuario ID:</span>
-                {{ $post->user_id }}</p>
-            <p class="text-lg"><span class="font-semibold">Creado el:</span>
-                {{ $post->created_at->format('d/m/Y H:i') }}</p>
-            <p class="text-lg"><span class="font-semibold">Última actualización:</span>
-                {{ $post->updated_at->format('d/m/Y H:i') }}</p>
+            <p class="text-lg">
+                <span class="font-semibold">ID:</span> {{ $post->id }}
+            </p>
+            <p class="text-lg">
+                <span class="font-semibold">Title:</span> {{ $post->title }}
+            </p>
+            <p class="text-lg">
+                <span class="font-semibold">Url Clean:</span> {{ $post->url_clean }}
+            </p>
+            <p class="text-lg">
+                <span class="font-semibold">Content:</span>
+                {!! $post->content ?? 'Sin contenido' !!}
+            </p>
+            <p class="text-lg">
+                <span class="font-semibold">Posted:</span> {{ $post->posted }}
+            </p>
+            <p class="text-lg">
+                <span class="font-semibold">Tags:</span>
+                @foreach ($post->tags as $tag)
+                    <span class="bg-gray-500 text-white px-2 py-1 rounded-full text-sm">
+                        {{ $tag->name }}
+                    </span>
+                @endforeach
+            </p>
+            <p class="text-lg">
+                <span class="font-semibold">Category:</span>
+                {{ $post->category->title }} ({{ $post->category_id }})
+            </p>
+            <p class="text-lg">
+                <span class="font-semibold">Usuario ID:</span> {{ $post->user_id }}
+            </p>
+            <p class="text-lg">
+                <span class="font-semibold">Creado el:</span>
+                {{ $post->created_at->format('d/m/Y H:i') }}
+            </p>
+            <p class="text-lg">
+                <span class="font-semibold">Última actualización:</span>
+                {{ $post->updated_at->format('d/m/Y H:i') }}
+            </p>
         </div>
-
         <div style="display: flex; justify-content: center; margin-top: 24px; gap: 16px;">
             <!-- Volver -->
             <a href="{{ route('posts.index') }}"
