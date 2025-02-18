@@ -13,12 +13,11 @@
             method="POST">
             @csrf
             @if (isset($image))
-                @method('PUT') <!-- Si estamos editando, usamos PUT -->
+                @method('PUT') 
             @endif
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
                     <label for="name" class="block text-white font-semibold">Name</label>
-                    <!-- Valor del campo name con valor de categoría en caso de edición -->
                     <input type="text" name="name" id="name"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('name', isset($image) ? $image->name : '') }}" required>
@@ -29,7 +28,6 @@
 
                 <div class="mb-4">
                     <label for="comment_id" class="block text-white font-semibold">Comment ID</label>
-                    <!-- Valor del campo comment_id con valor de categoría en caso de edición -->
                     <input type="text" name="comment_id" id="comment_id"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('comment_id', isset($image) ? $image->comment_id : '') }}" required>

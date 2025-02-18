@@ -13,12 +13,11 @@
             method="POST">
             @csrf
             @if (isset($tag))
-                @method('PUT') <!-- Si estamos editando, usamos PUT -->
+                @method('PUT')
             @endif
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
                     <label for="name" class="block text-white font-semibold">Name</label>
-                    <!-- Valor del campo name con valor de categoría en caso de edición -->
                     <input type="text" name="name" id="name"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('name', isset($tag) ? $tag->name : '') }}" required>
@@ -29,7 +28,6 @@
 
                 <div class="mb-4">
                     <label for="url_clean" class="block text-white font-semibold">Url Clean</label>
-                    <!-- Valor del campo url_clean con valor de categoría en caso de edición -->
                     <input type="text" name="url_clean" id="url_clean"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('url_clean', isset($tag) ? $tag->url_clean : '') }}" required>

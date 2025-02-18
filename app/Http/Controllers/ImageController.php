@@ -29,16 +29,16 @@ class ImageController extends Controller
         // Validación de los datos
         $request->validate([
             'name' => 'required|string|max:255',
-            'comment_id' => 'nullable|exists:comments,id', 
+            'comment_id' => 'nullable|exists:comments,id',
         ]);
 
-        // Reemplazar las barras invertidas (\) por barras normales (/) en la ruta del nombre de la imagen
+        // Reemplazar las barras invertidas por barras normales en la ruta de la imagen
         $imageName = str_replace('\\', '/', $request->name);
 
         // Almacenar la imagen con la ruta y el comentario asociado
         Image::create([
-            'name' => $imageName,  // Guardar el nombre de la imagen con la ruta correcta
-            'comment_id' => $request->comment_id,  // Asociar la imagen al comentario
+            'name' => $imageName,  // Ruta de la imagen
+            'comment_id' => $request->comment_id,  // ID del comentario asociado
         ]);
 
 

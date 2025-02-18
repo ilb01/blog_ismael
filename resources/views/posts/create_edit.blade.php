@@ -12,12 +12,11 @@
         <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST">
             @csrf
             @if (isset($post))
-                @method('PUT') <!-- Si estamos editando, usamos PUT -->
+                @method('PUT')
             @endif
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
                     <label for="title" class="block text-white font-semibold">Title</label>
-                    <!-- Valor del campo title con valor de categoría en caso de edición -->
                     <input type="text" name="title" id="title"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('title', isset($post) ? $post->title : '') }}" required>
@@ -28,7 +27,6 @@
 
                 <div class="mb-4">
                     <label for="url_clean" class="block text-white font-semibold">Url Clean</label>
-                    <!-- Valor del campo url_clean con valor de categoría en caso de edición -->
                     <input type="text" name="url_clean" id="url_clean"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('url_clean', isset($post) ? $post->url_clean : '') }}" required>
@@ -38,7 +36,6 @@
                 </div>
                 <div class="mb-4">
                     <label for="content" class="block text-white font-semibold">Content</label>
-                    <!-- Valor del campo content con valor de categoría en caso de edición -->
                     <input type="text" name="content" id="content"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('content', isset($post) ? $post->content : '') }}" required>
@@ -62,7 +59,6 @@
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-                <!-- Campo para los tags -->
                 <div class="mb-4">
                     <label class="block text-white font-semibold">Tags</label>
                     <div class="mt-2 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">

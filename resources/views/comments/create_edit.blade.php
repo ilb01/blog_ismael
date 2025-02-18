@@ -13,12 +13,11 @@
             method="POST">
             @csrf
             @if (isset($comment))
-                @method('PUT') <!-- Si estamos editando, usamos PUT -->
+                @method('PUT')
             @endif
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
                     <label for="name" class="block text-white font-semibold">Comment</label>
-                    <!-- Valor del campo name con valor de categoría en caso de edición -->
                     <input type="text" name="name" id="name"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('name', isset($comment) ? $comment->comment : '') }}" required>
@@ -29,7 +28,6 @@
 
                 <div class="mb-4">
                     <label for="user_id" class="block text-white font-semibold">User ID</label>
-                    <!-- Valor del campo user_id con valor de categoría en caso de edición -->
                     <input type="text" name="user_id" id="user_id"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('user_id', isset($comment) ? $comment->user_id : '') }}" required>
@@ -39,7 +37,6 @@
                 </div>
                 <div class="mb-4">
                     <label for="post_id" class="block text-white font-semibold">Post ID</label>
-                    <!-- Valor del campo post_id con valor de categoría en caso de edición -->
                     <input type="text" name="post_id" id="post_id"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('post_id', isset($comment) ? $comment->post_id : '') }}" required>

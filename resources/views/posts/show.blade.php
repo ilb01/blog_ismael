@@ -46,7 +46,7 @@
             </p>
         </div>
         <div style="display: flex; justify-content: center; margin-top: 24px; gap: 16px;">
-            <!-- Volver -->
+            <!-- Botón de Volver (Back) -->
             <a href="{{ route('posts.index') }}"
                 style="text-align: center; background-color: #2d3748; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600;
                 transition: all 0.4s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
@@ -55,7 +55,7 @@
                 ⬅️ Volver
             </a>
 
-            <!-- Editar -->
+            <!-- Botón de Editar (Edit) -->
             <a href="{{ route('posts.edit', $post->id) }}"
                 style="text-align: center; background-color: #16A34A; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600;
                 transition: all 0.4s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
@@ -64,7 +64,7 @@
                 ✏️ Editar
             </a>
 
-            <!-- Eliminar -->
+            <!-- Botón de Eliminar (Delete) -->
             <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
                 onsubmit="return confirm('¿Estás seguro de eliminar este post?');">
                 @csrf

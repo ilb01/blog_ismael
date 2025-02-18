@@ -41,7 +41,7 @@ class TagController extends Controller
             ->with('error', 'El valor de URL Clean ya está en uso. Por favor, elige otro.');
     }
 
-    // Si no existe, crear el registro
+
     Tag::create($request->all());
 
     session()->flash('success', 'Tag created successfully!');
@@ -56,9 +56,7 @@ class TagController extends Controller
         return view('tags.show', compact('tag'));
     }
 
-    /**
-     * Muestra el formulario para editar una etiqueta.
-     */
+
     public function edit($id)
     {
         $tag = Tag::findOrFail($id);

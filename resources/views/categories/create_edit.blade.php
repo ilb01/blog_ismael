@@ -13,12 +13,11 @@
             method="POST">
             @csrf
             @if (isset($category))
-                @method('PUT') <!-- Si estamos editando, usamos PUT -->
+                @method('PUT') 
             @endif
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
                     <label for="title" class="block text-white font-semibold">Title</label>
-                    <!-- Valor del campo title con valor de categoría en caso de edición -->
                     <input type="text" name="title" id="title"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('title', isset($category) ? $category->title : '') }}" required>
@@ -29,7 +28,6 @@
 
                 <div class="mb-4">
                     <label for="url_clean" class="block text-white font-semibold">Url Clean</label>
-                    <!-- Valor del campo url_clean con valor de categoría en caso de edición -->
                     <input type="text" name="url_clean" id="url_clean"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('url_clean', isset($category) ? $category->url_clean : '') }}" required>
@@ -38,7 +36,6 @@
                     @enderror
                 </div>
 
-                <!-- Botones -->
                 <div class="flex flex-wrap justify-end items-center gap-6">
                     <a href="{{ route('categories.index') }}"
                         style="flex: 0 1 15%; text-align: center; background-color: #de364f; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 600;

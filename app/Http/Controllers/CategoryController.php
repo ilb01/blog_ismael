@@ -20,11 +20,10 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        $category = Category::findOrFail($id); // Busca la categoría o lanza un error 404
-        return view('categories.show', compact('category')); // Retorna la vista con la categoría
+        $category = Category::findOrFail($id); // Busca la categoría por su ID
+        return view('categories.show', compact('category'));
     }
 
-    // En el controlador que maneja la creación de categorías
     public function store(Request $request)
     {
         $request->validate([
@@ -44,7 +43,6 @@ class CategoryController extends Controller
         // Busca la categoría por su ID
         $category = Category::findOrFail($id);
 
-        // Retorna la vista con la categoría
         return view('categories.create_edit', compact('category'));
     }
 

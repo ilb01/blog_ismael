@@ -19,18 +19,18 @@ class CommentController extends Controller
 
     public function create()
     {
-        $users = User::all();  // Obtener todos los usuarios
-        $posts = Post::all();  // Obtener todos los posts
+        // Obtener todos los usuarios y posts
+        $users = User::all();
+        $posts = Post::all();
         return view('comments.create_edit', compact('users', 'posts'));
     }
 
     public function show($id)
     {
-        $comment = Comment::findOrFail($id); // Busca el comentario o lanza un error 404
-        return view('comments.show', compact('comment')); // Retorna la vista con el comentario
+        $comment = Comment::findOrFail($id); // Busca el comentario por ID
+        return view('comments.show', compact('comment'));
     }
 
-    // En el controlador que maneja la creación de comentarios
     public function store(Request $request)
     {
         // Validar datos del formulario
@@ -54,13 +54,13 @@ class CommentController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 // Guardar la imagen en el directorio 'public/comments'
-                $path = $image->store('comments', 'public'); // Asegúrate de que sea 'public' para hacerlo accesible
-                $filename = str_replace('public/', '', $path); // Obtener el nombre limpio del archivo
+                $path = $image->store('comments', 'public'); // Guardar la imagen en el directorio 'public/comments'
+                $filename = str_replace('public/', '', $path); // Eliminar 'public/' de la ruta
 
                 // Crear la entrada en la base de datos para la imagen
                 Image::create([
                     'name' => $filename,
-                    'comment_id' => $comment->id, // Asociar la imagen con el comentario
+                    'comment_id' => $comment->id, // ID del comentario asociado
                 ]);
             }
         }
@@ -71,8 +71,8 @@ class CommentController extends Controller
     public function edit($id)
     {
         $comment = Comment::findOrFail($id);
-        $users = User::all();  // Obtener todos los usuarios
-        $posts = Post::all();  // Obtener todos los posts
+        $users = User::all();
+        $posts = Post::all();  
         return view('comments.create_edit', compact('comment', 'users', 'posts'));
     }
 
