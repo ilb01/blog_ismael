@@ -29,7 +29,7 @@ class PostFilter extends Component
                     $q->where('tags.id', $this->tag_id);
                 });
             })
-            ->when($this->posted, function ($query) {
+            ->when($this->posted !== '', function ($query) {
                 $query->where('posted', $this->posted);
             })
             ->with(['category', 'tags', 'user', 'comments']) // Cargar relaciones
