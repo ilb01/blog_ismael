@@ -67,6 +67,7 @@
             transition: text-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
         }
 
+
         /* Efecto Hover */
         .glow-text:hover {
             text-shadow: 0 0 25px rgba(105, 116, 117, 0.8);
@@ -176,6 +177,7 @@
                 </button>
             </form>
         </div>
+        {{-- Lista de POSTS --}}
 
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 mt-6 px-6">
             @foreach ($posts as $post)
@@ -333,7 +335,6 @@
         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
     </footer>
 
-    <!-- Script para alternar los comentarios con efecto suave -->
     <script>
         // Función para alternar la visibilidad de los comentarios
         function toggleComments(postId) {
@@ -349,7 +350,7 @@
             }
         }
 
-        // Función para alternar la visibilidad del formulario de comentarios
+        // Función para alternar la visibilidad del formulario de comentarios (Añadir Comentario)
         function toggleForm(postId) {
             const commentForm = document.getElementById(`comment-form-${postId}`);
             const toggleFormButton = document.getElementById(`toggle-form-btn-${postId}`);
@@ -404,5 +405,6 @@
             });
         });
     </script>
+</body>
 
 </html>

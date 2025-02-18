@@ -24,7 +24,7 @@
                 <div class="mb-6 flex">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 w-full">Manage Images</h3>
                     <a href="{{ route('images.create') }}"
-                        style="width: 10%;
+                        style="width: 20%;
                             padding: 0.75rem 1.5rem;
                             background-color: #28a745;
                             color: white;
