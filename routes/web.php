@@ -19,7 +19,8 @@ Route::resource('images', ImageController::class);
 Route::get('/', function () {
     $posts = Post::all();
     return view('blog', compact('posts'));
-});
+})->name('home');
+
 Route::get('/search', [PostController::class, 'search'])->name('search');
 
 Route::get('/dashboard', function () {

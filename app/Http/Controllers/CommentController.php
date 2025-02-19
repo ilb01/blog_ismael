@@ -21,7 +21,6 @@ class CommentController extends Controller
     {
         $users = User::all();
         $posts = Post::all();
-        return view('comments.create_edit', compact('users', 'posts'));
     }
 
     public function show($id)
@@ -32,37 +31,39 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        // Validación de los datos recibidos
+        $validated = $request->validate([
             'comment' => 'required|string|max:1000',
             'post_id' => 'required|exists:posts,id',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',  // Asegura que todas las imágenes sean válidas
         ]);
 
         // Crear el comentario
         $comment = Comment::create([
-            'comment' => $request->comment,
-            'post_id' => $request->post_id,
+            'comment' => $validated['comment'],
+            'post_id' => $validated['post_id'],
             'user_id' => $request->user()->id,
         ]);
 
-        // Procesar las imágenes si existen
+        // Subir múltiples imágenes
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
+            $images = $request->file('images');  // Obtener todas las imágenes
+            foreach ($images as $image) {
                 if ($image->isValid()) {
-                    // Generar un nombre único para la imagen con un identificador único (UUID o ID del comentario)
+                    // Generar un nombre único para cada imagen
                     $filename = uniqid('image_', true) . '.' . $image->getClientOriginalExtension();
-                    $path = $image->storeAs('comments', $filename, 'public'); // Almacena la imagen en el directorio 'comments' en el almacenamiento público
+                    $path = $image->storeAs('comments', $filename, 'public');  // Almacenar imagen en el directorio 'comments'
 
-                    // Guardar la imagen en la base de datos
+                    // Guardar la ruta de la imagen en la base de datos
                     Image::create([
-                        'name' => $path,  // Guardamos solo la ruta relativa al almacenamiento
+                        'name' => $path,
                         'comment_id' => $comment->id,
                     ]);
                 }
             }
         }
 
-        return redirect()->route('comments.index')->with('success', 'Comment created successfully!');
+        return redirect()->route('home');
     }
 
     public function edit($id)
@@ -70,7 +71,6 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $users = User::all();
         $posts = Post::all();
-        return view('comments.create_edit', compact('comment', 'users', 'posts'));
     }
 
     public function update(Request $request, $id)
@@ -89,10 +89,10 @@ class CommentController extends Controller
 
     public function destroy(Comment $comment)
     {
-        // Eliminar imágenes asociadas antes de borrar el comentario
+        // Eliminar las imágenes asociadas antes de eliminar el comentario
         foreach ($comment->images as $image) {
-            Storage::disk('public')->delete($image->name); // Elimina la imagen del almacenamiento
-            $image->delete();
+            Storage::delete('public/' . $image->name);  // Eliminar imagen del almacenamiento
+            $image->delete();  // Eliminar registro en la base de datos
         }
 
         $comment->delete();
