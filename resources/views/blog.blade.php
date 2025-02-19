@@ -251,7 +251,7 @@
                                                 {{ $comment->user->name ?? 'Anónimo' }}</p>
                                             <p class="text-gray-200 text-lg italic">"{{ $comment->comment }}"</p>
 
-                                            @if ($comment->images->isNotEmpty())
+                                            @if ($comment->images->count() > 0)
                                                 <div class="mt-3 grid grid-cols-2 gap-3">
                                                     @foreach ($comment->images as $image)
                                                         <img src="{{ asset('storage/' . $image->name) }}"
@@ -260,7 +260,6 @@
                                                     @endforeach
                                                 </div>
                                             @endif
-
 
 
                                             <p class="text-xs text-gray-400 mt-3">🕒
@@ -306,10 +305,12 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <input type="file" name="images[]" id="images" multiple
+                                        <input type="file" name="images[]" id="images-{{ $post->id }}" multiple
                                             class="w-full p-3 rounded-lg bg-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 transition-all duration-300">
-                                        <div id="image-preview" class="mt-3 grid grid-cols-3 gap-3"></div>
+                                        <div id="image-preview-{{ $post->id }}" class="mt-3 grid grid-cols-3 gap-3">
+                                        </div>
                                     </div>
+
 
 
                                     <div class="flex space-x-4">
@@ -392,19 +393,24 @@
             }
         });
 
-        document.getElementById('images').addEventListener('change', function(event) {
-            const preview = document.getElementById('image-preview');
-            preview.innerHTML = ''; // Limpiar previsualización anterior
+        // Previsualización de imágenes seleccionadas
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function(event) {
+                const postId = this.id.split('-')[1]; // Extrae el ID del post
+                const preview = document.getElementById(`image-preview-${postId}`);
+                preview.innerHTML = ''; // Limpiar previsualización anterior
 
-            Array.from(event.target.files).forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.classList.add('rounded-lg', 'shadow-lg', 'w-full', 'h-24', 'object-cover');
-                    preview.appendChild(img);
-                };
-                reader.readAsDataURL(file);
+                Array.from(event.target.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.classList.add('rounded-lg', 'shadow-lg', 'w-full', 'h-24',
+                            'object-cover');
+                        preview.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
             });
         });
     </script>

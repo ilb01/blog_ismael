@@ -62,8 +62,6 @@ class CommentController extends Controller
             }
         }
 
-
-
         return redirect()->route('comments.index')->with('success', 'Comment created successfully!');
     }
 

@@ -23,22 +23,6 @@
             <div class="bg-white dark:bg-gray-900 shadow-xl sm:rounded-lg p-6 h-full flex flex-col">
                 <div class="mb-6 flex">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 w-full">Manage Comments</h3>
-                    {{-- <a href="{{ route('comments.create') }}"
-                        style="width: 20%;
-                            padding: 0.75rem 1.5rem;
-                            background-color: #28a745;
-                            color: white;
-                            border-radius: 0.5rem;
-                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                            transition: all 0.3s ease-in-out;
-                            outline: none;
-                            border: none;
-                            text-align: center;
-                            transform: scale(1);"
-                        onmouseover="this.style.backgroundColor='#218838'; this.style.transform='scale(1.05)';"
-                        onmouseout="this.style.backgroundColor='#28a745'; this.style.transform='scale(1)';">
-                        + Add Comment
-                    </a> --}}
                 </div>
 
                 <div class="overflow-auto flex-grow w-full">
@@ -49,8 +33,8 @@
                                 </th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">Comment
                                 </th>
-                                <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">User ID</th>
-                                <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">Post ID</th>
+                                <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">User (ID)</th>
+                                <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">Post (ID)</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Comment Created</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
@@ -65,9 +49,9 @@
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $comment->comment }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        {{ $comment->user_id }}</td>
+                                        {{$comment->user->name}} ({{ $comment->user_id }})</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        {{ $comment->post_id }}</td>
+                                        {{$comment->post->title}} ({{ $comment->post_id }})</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $comment->created_at }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
@@ -79,14 +63,6 @@
                                                 onmouseout="this.style.backgroundColor='#f59e0b'; this.style.transform='scale(1)';">
                                                 👁️ Show
                                             </a>
-
-                                            {{-- <!-- Botón de Editar (Edit) -->
-                                            <a href="{{ route('comments.edit', $comment->id) }}"
-                                                style="padding: 0.5rem 1rem; background-color: #3b82f6; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block;"
-                                                onmouseover="this.style.backgroundColor='#2563eb'; this.style.transform='scale(1.05)';"
-                                                onmouseout="this.style.backgroundColor='#3b82f6'; this.style.transform='scale(1)';">
-                                                ✏️ Edit
-                                            </a> --}}
 
                                             <!-- Botón de Eliminar (Delete) -->
                                             <form action="{{ route('comments.destroy', $comment->id) }}" method="POST"

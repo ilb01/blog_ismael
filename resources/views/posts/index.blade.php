@@ -58,7 +58,7 @@
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Category (ID)</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">User
-                                    ID</th>
+                                    (ID)</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Post Created</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
@@ -98,7 +98,7 @@
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->category->title }} ({{ $post->category_id }})</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        {{ $post->user_id }}</td>
+                                        {{ $post->user->name }} ({{$post->user_id}})</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
                                         {{ $post->created_at }}</td>
                                     <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
