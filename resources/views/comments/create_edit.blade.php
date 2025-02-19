@@ -17,33 +17,15 @@
             @endif
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
-                    <label for="name" class="block text-white font-semibold">Comment</label>
-                    <input type="text" name="name" id="name"
+                    <label for="comment" class="block text-white font-semibold">Comment</label>
+                    <input type="text" name="comment" id="comment"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('name', isset($comment) ? $comment->comment : '') }}" required>
-                    @error('name')
+                        value="{{ old('comment', isset($comment) ? $comment->comment : '') }}" required>
+                    @error('comment')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <div class="mb-4">
-                    <label for="user_id" class="block text-white font-semibold">User ID</label>
-                    <input type="text" name="user_id" id="user_id"
-                        class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('user_id', isset($comment) ? $comment->user_id : '') }}" required>
-                    @error('user_id')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label for="post_id" class="block text-white font-semibold">Post ID</label>
-                    <input type="text" name="post_id" id="post_id"
-                        class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('post_id', isset($comment) ? $comment->post_id : '') }}" required>
-                    @error('post_id')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
 
                 <!-- Botones -->
                 <div class="flex flex-wrap justify-end items-center gap-6">

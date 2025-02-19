@@ -56,7 +56,7 @@
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
                                     Tags</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">
-                                    Category ID</th>
+                                    Category (ID)</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">User
                                     ID</th>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">

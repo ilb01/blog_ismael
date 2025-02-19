@@ -251,7 +251,7 @@
                                                 {{ $comment->user->name ?? 'Anónimo' }}</p>
                                             <p class="text-gray-200 text-lg italic">"{{ $comment->comment }}"</p>
 
-                                            @if ($comment->images->count() > 0)
+                                            @if ($comment->images->isNotEmpty())
                                                 <div class="mt-3 grid grid-cols-2 gap-3">
                                                     @foreach ($comment->images as $image)
                                                         <img src="{{ asset('storage/' . $image->name) }}"
@@ -260,6 +260,7 @@
                                                     @endforeach
                                                 </div>
                                             @endif
+
 
 
                                             <p class="text-xs text-gray-400 mt-3">🕒
@@ -305,10 +306,11 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <input type="file" name="images[]" multiple id="image-input"
+                                        <input type="file" name="images[]" id="images" multiple
                                             class="w-full p-3 rounded-lg bg-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 transition-all duration-300">
                                         <div id="image-preview" class="mt-3 grid grid-cols-3 gap-3"></div>
                                     </div>
+
 
                                     <div class="flex space-x-4">
                                         <button type="submit"
@@ -389,7 +391,8 @@
                 dropdownMenu.classList.add('hidden');
             }
         });
-        document.getElementById('image-input').addEventListener('change', function(event) {
+
+        document.getElementById('images').addEventListener('change', function(event) {
             const preview = document.getElementById('image-preview');
             preview.innerHTML = ''; // Limpiar previsualización anterior
 

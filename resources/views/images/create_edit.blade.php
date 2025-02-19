@@ -13,7 +13,7 @@
             method="POST">
             @csrf
             @if (isset($image))
-                @method('PUT') 
+                @method('PUT')
             @endif
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
@@ -22,16 +22,6 @@
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('name', isset($image) ? $image->name : '') }}" required>
                     @error('name')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label for="comment_id" class="block text-white font-semibold">Comment ID</label>
-                    <input type="text" name="comment_id" id="comment_id"
-                        class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('comment_id', isset($image) ? $image->comment_id : '') }}" required>
-                    @error('comment_id')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>

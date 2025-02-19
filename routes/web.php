@@ -16,10 +16,6 @@ Route::resource('posts', PostController::class);
 Route::resource('comments', CommentController::class);
 Route::resource('images', ImageController::class);
 
-
-// Ruta específica para almacenar comentarios asociados a un post
-Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
-
 Route::get('/', function () {
     $posts = Post::all();
     return view('blog', compact('posts'));

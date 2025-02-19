@@ -33,17 +33,15 @@ class ImageController extends Controller
         ]);
 
         // Reemplazar las barras invertidas por barras normales en la ruta de la imagen
-        $imageName = str_replace('\\', '/', $request->name);
+        $path = str_replace('\\', '/', $request->name);
 
         // Almacenar la imagen con la ruta y el comentario asociado
         Image::create([
-            'name' => $imageName,  // Ruta de la imagen
+            'name' => $path,  // Ruta de la imagen
             'comment_id' => $request->comment_id,  // ID del comentario asociado
         ]);
 
-
-        session()->flash('success', 'Image created successfully!');
-        return redirect()->route('images.index');
+        return redirect()->route('images.index')->with('success', 'Image created successfully!');
     }
 
     public function edit($id)
@@ -69,7 +67,6 @@ class ImageController extends Controller
     {
         $image->delete();
 
-        session()->flash('success', 'Image deleted successfully!');
-        return redirect()->route('images.index');
+        return redirect()->route('images.index')->with('success', 'Image deleted successfully!');
     }
 }

@@ -23,7 +23,7 @@
             <div class="bg-white dark:bg-gray-900 shadow-xl sm:rounded-lg p-6 h-full flex flex-col">
                 <div class="mb-6 flex">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 w-full">Manage Comments</h3>
-                    <a href="{{ route('comments.create') }}"
+                    {{-- <a href="{{ route('comments.create') }}"
                         style="width: 20%;
                             padding: 0.75rem 1.5rem;
                             background-color: #28a745;
@@ -38,7 +38,7 @@
                         onmouseover="this.style.backgroundColor='#218838'; this.style.transform='scale(1.05)';"
                         onmouseout="this.style.backgroundColor='#28a745'; this.style.transform='scale(1)';">
                         + Add Comment
-                    </a>
+                    </a> --}}
                 </div>
 
                 <div class="overflow-auto flex-grow w-full">
@@ -80,13 +80,13 @@
                                                 👁️ Show
                                             </a>
 
-                                            <!-- Botón de Editar (Edit) -->
+                                            {{-- <!-- Botón de Editar (Edit) -->
                                             <a href="{{ route('comments.edit', $comment->id) }}"
                                                 style="padding: 0.5rem 1rem; background-color: #3b82f6; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out; text-align: center; display: inline-block;"
                                                 onmouseover="this.style.backgroundColor='#2563eb'; this.style.transform='scale(1.05)';"
                                                 onmouseout="this.style.backgroundColor='#3b82f6'; this.style.transform='scale(1)';">
                                                 ✏️ Edit
-                                            </a>
+                                            </a> --}}
 
                                             <!-- Botón de Eliminar (Delete) -->
                                             <form action="{{ route('comments.destroy', $comment->id) }}" method="POST"

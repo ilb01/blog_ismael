@@ -34,7 +34,7 @@
                 {{ $post->category->title }} ({{ $post->category_id }})
             </p>
             <p class="text-lg">
-                <span class="font-semibold">Usuario ID:</span> {{ $post->user_id }}
+                <span class="font-semibold">User ID:</span> {{ $post->user_id }}
             </p>
             <p class="text-lg">
                 <span class="font-semibold">Creado el:</span>

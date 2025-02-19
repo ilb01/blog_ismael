@@ -7,19 +7,18 @@ use App\Models\Image;
 use App\Models\User;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CommentController extends Controller
 {
     public function index()
     {
-        $comments = Comment::all();
+        $comments = Comment::with('images')->get();
         return view('comments.index', compact('comments'));
     }
 
     public function create()
     {
-        // Obtener todos los usuarios y posts
         $users = User::all();
         $posts = Post::all();
         return view('comments.create_edit', compact('users', 'posts'));
@@ -27,51 +26,43 @@ class CommentController extends Controller
 
     public function show($id)
     {
-        $comment = Comment::findOrFail($id); // Busca el comentario por ID
+        $comment = Comment::with('images')->findOrFail($id);
         return view('comments.show', compact('comment'));
     }
 
     public function store(Request $request)
     {
-        // Validar datos del formulario
         $request->validate([
             'comment' => 'required|string|max:1000',
             'post_id' => 'required|exists:posts,id',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Aseguramos que sea una imagen y con los formatos correctos
-        ], [
-            'images.*.image' => 'Solo se permiten archivos de imagen.',
-            'images.*.mimes' => 'Solo se permiten imágenes en formato JPEG, PNG, JPG o GIF.',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Crear el comentario
         $comment = Comment::create([
-            'comment' => $request->input('comment'),
-            'post_id' => $request->input('post_id'),
-            'user_id' => Auth::id(), // Usuario autenticado
+            'comment' => $request->comment,
+            'post_id' => $request->post_id,
+            'user_id' => $request->user()->id,
         ]);
 
-        // Verificar si se han subido imágenes
+        // Procesar las imágenes si existen
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                // Verificamos que la imagen sea válida antes de procesarla
                 if ($image->isValid()) {
-                    // Almacenar la imagen en el disco público, en la carpeta 'comments'
-                    $path = $image->store('comments', 'public');
+                    // Generar un nombre único para la imagen con un identificador único (UUID o ID del comentario)
+                    $filename = uniqid('image_', true) . '.' . $image->getClientOriginalExtension();
+                    $path = $image->storeAs('comments', $filename, 'public'); // Almacena la imagen en el directorio 'comments' en el almacenamiento público
 
-                    // Aseguramos que el nombre del archivo se almacene correctamente
-                    $filename = basename($path); // Usamos basename() para obtener solo el nombre del archivo
-
-                    // Crear la entrada en la base de datos para la imagen
+                    // Guardar la imagen en la base de datos
                     Image::create([
-                        'name' => $filename,
-                        'comment_id' => $comment->id, // Relacionamos la imagen con el comentario
+                        'name' => $path,  // Guardamos solo la ruta relativa al almacenamiento
+                        'comment_id' => $comment->id,
                     ]);
-                } else {
-                    // Si la imagen no es válida, puedes lanzar un error o hacer algo aquí
-                    return back()->withErrors(['images' => 'Algunas imágenes no son válidas.']);
                 }
             }
         }
+
+
 
         return redirect()->route('comments.index')->with('success', 'Comment created successfully!');
     }
@@ -100,9 +91,14 @@ class CommentController extends Controller
 
     public function destroy(Comment $comment)
     {
+        // Eliminar imágenes asociadas antes de borrar el comentario
+        foreach ($comment->images as $image) {
+            Storage::disk('public')->delete($image->name); // Elimina la imagen del almacenamiento
+            $image->delete();
+        }
+
         $comment->delete();
 
-        session()->flash('success', 'Comment deleted successfully!');
-        return redirect()->route('comments.index');
+        return redirect()->route('comments.index')->with('success', 'Comment deleted successfully!');
     }
 }

@@ -27,14 +27,14 @@
                 ⬅️ Volver
             </a>
 
-            <!-- Editar -->
+            {{-- <!-- Editar -->
             <a href="{{ route('comments.edit', $comment->id) }}"
                 style="text-align: center; background-color: #16A34A; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600;
                 transition: all 0.4s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
                 onmouseover="this.style.backgroundColor='#15803D'; this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 16px rgba(0, 0, 0, 0.2)';"
                 onmouseout="this.style.backgroundColor='#16A34A'; this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.1)';">
                 ✏️ Editar
-            </a>
+            </a> --}}
 
             <!-- Eliminar -->
             <form action="{{ route('comments.destroy', $comment->id) }}" method="POST"
