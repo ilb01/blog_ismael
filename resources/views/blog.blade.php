@@ -253,7 +253,7 @@
                                                 {{ $comment->user->name ?? 'Anónimo' }}</p>
                                             <p class="text-gray-200 text-lg italic">"{{ $comment->comment }}"</p>
 
-                                            @if ($comment->images->count() > 0)
+                                            {{-- @if ($comment->images->count() > 0)
                                                 <div class="mt-3 grid grid-cols-2 gap-3">
                                                     @foreach ($comment->images as $image)
                                                         <img src="{{ asset('storage/' . $image->name) }}"
@@ -261,8 +261,7 @@
                                                             class="rounded-lg shadow-lg transform hover:scale-110 transition-all duration-300 cursor-pointer">
                                                     @endforeach
                                                 </div>
-                                            @endif
-
+                                            @endif --}}
 
                                             <p class="text-xs text-gray-400 mt-3">🕒
                                                 {{ $comment->created_at->diffForHumans() }}</p>

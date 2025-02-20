@@ -21,7 +21,7 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function images()
+    public function image()
     {
         return $this->hasMany(Image::class);
     }

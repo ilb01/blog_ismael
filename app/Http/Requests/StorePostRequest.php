@@ -28,7 +28,7 @@ class StorePostRequest extends FormRequest
             'url_clean' => 'required|string|max:500|unique:posts,url_clean,',
             'content' => 'required|string',
             'posted' => 'required|in:yes,not',
-            'category_id' => 'required|exists:categories,id', // Asegúrate de que exista en la tabla categories
+            'category_id' => 'required|exists:categories,id', 
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ];

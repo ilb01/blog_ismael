@@ -13,19 +13,17 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comments = Comment::with('images')->get();
+        $comments = Comment::all();
         return view('comments.index', compact('comments'));
     }
 
     public function create()
     {
-        $users = User::all();
-        $posts = Post::all();
+        return view('comments.create');
     }
 
     public function show($id)
     {
-        $comment = Comment::with('images')->findOrFail($id);
         return view('comments.show', compact('comment'));
     }
 
@@ -49,17 +47,8 @@ class CommentController extends Controller
         if ($request->hasFile('images')) {
             $images = $request->file('images');  // Obtener todas las imágenes
             foreach ($images as $image) {
-                if ($image->isValid()) {
-                    // Generar un nombre único para cada imagen
-                    $filename = uniqid('image_', true) . '.' . $image->getClientOriginalExtension();
-                    $path = $image->storeAs('comments', $filename, 'public');  // Almacenar imagen en el directorio 'comments'
-
-                    // Guardar la ruta de la imagen en la base de datos
-                    Image::create([
-                        'name' => $path,
-                        'comment_id' => $comment->id,
-                    ]);
-                }
+                    $path = $image->store('comments',  'public');  // Almacenar imagen en el directorio 'comments'
+                    $comment->images()->create(['name' => $path, 'comment_id' => $comment->id]);
             }
         }
 
@@ -68,20 +57,15 @@ class CommentController extends Controller
 
     public function edit($id)
     {
-        $comment = Comment::findOrFail($id);
-        $users = User::all();
-        $posts = Post::all();
+        return view('comments.edit', ['comment' => Comment::findOrFail($id)]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Comment $comment)
     {
         $validated = $request->validate([
             'comment' => 'required|string|max:1000',
-            'user_id' => 'required|exists:users,id',
-            'post_id' => 'required|exists:posts,id',
         ]);
 
-        $comment = Comment::findOrFail($id);
         $comment->update($validated);
 
         return redirect()->route('comments.index')->with('success', 'Comment updated successfully!');
@@ -89,12 +73,6 @@ class CommentController extends Controller
 
     public function destroy(Comment $comment)
     {
-        // Eliminar las imágenes asociadas antes de eliminar el comentario
-        foreach ($comment->images as $image) {
-            Storage::delete('public/' . $image->name);  // Eliminar imagen del almacenamiento
-            $image->delete();  // Eliminar registro en la base de datos
-        }
-
         $comment->delete();
 
         return redirect()->route('comments.index')->with('success', 'Comment deleted successfully!');
