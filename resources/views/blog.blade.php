@@ -104,9 +104,11 @@
             @if (Route::has('login'))
                 <nav class="flex space-x-8">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="relative text-white text-xl font-medium glow-text">
-                            Dashboard
-                        </a>
+                        @if (Auth::user()->role !== 'user')
+                            <a href="{{ url('/dashboard') }}" class="relative text-white text-xl font-medium glow-text">
+                                Dashboard
+                            </a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}" class="relative text-white text-xl font-medium glow-text">
                             Log in
@@ -310,7 +312,6 @@
                                         <div id="image-preview-{{ $post->id }}" class="mt-3 grid grid-cols-3 gap-3">
                                         </div>
                                     </div>
-
 
                                     <div class="flex space-x-4">
                                         <button type="submit"

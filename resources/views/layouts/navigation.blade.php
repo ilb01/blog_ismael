@@ -9,40 +9,42 @@
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
-                        {{ __('Categories') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                        {{ __('Posts') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.index')">
-                        {{ __('Tags') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('comments.index')" :active="request()->routeIs('comments.index')">
-                        {{ __('Comments') }}
-                    </x-nav-link>
-                </div>
+                @if (Auth::user()->role !== 'user')
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                            {{ __('Categories') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
+                            {{ __('Posts') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.index')">
+                            {{ __('Tags') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('comments.index')" :active="request()->routeIs('comments.index')">
+                            {{ __('Comments') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <a href="/" class="inline-block px-3 py-1 text-sm font-semibold"
                     style="background-color: #374151; color: white; border-radius: 0.375rem; transition: all 0.2s ease-in-out;"
-                    onmouseover="this.style.backgroundColor='#4b5563'" onmouseout="this.style.backgroundColor='#374151'">
+                    onmouseover="this.style.backgroundColor='#4b5563'"
+                    onmouseout="this.style.backgroundColor='#374151'">
                     Ir a Inicio
                 </a>
                 <x-dropdown align="right" width="48">
@@ -131,4 +133,3 @@
         </div>
     </div>
 </nav>
-
