@@ -32,7 +32,12 @@ class CommentController extends Controller
         $validated = $request->validate([
             'comment' => 'required|string|max:1000',
             'post_id' => 'required|exists:posts,id',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',  // Asegura que todas las imágenes sean válidas
+            'images.*' => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg,gif',
+                'max:102400',  // 100KB (100 KB = 102400 bytes)
+            ],
         ]);
 
         // Crear el comentario

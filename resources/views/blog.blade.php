@@ -262,7 +262,7 @@
                                                     @endforeach
                                                 </div>
                                             @endif
-
+                                            
                                             <p class="text-xs text-gray-400 mt-3">🕒
                                                 {{ $comment->created_at->diffForHumans() }}</p>
                                         </div>
@@ -306,8 +306,7 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <input type="file" name="images[]" id="images-{{ $post->id }}" multiple
-                                            accept="image/*"
+                                        <input type="file" name="images[]" id="images-{{ $post->id }}" multiple accept="image/*"
                                             class="w-full p-3 rounded-lg bg-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 transition-all duration-300">
                                         <div id="image-preview-{{ $post->id }}" class="mt-3 grid grid-cols-3 gap-3">
                                         </div>
