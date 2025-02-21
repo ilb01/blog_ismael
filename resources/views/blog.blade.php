@@ -253,15 +253,15 @@
                                                 {{ $comment->user->name ?? 'Anónimo' }}</p>
                                             <p class="text-gray-200 text-lg italic">"{{ $comment->comment }}"</p>
 
-                                            {{-- @if ($comment->images->count() > 0)
+                                            @if ($comment->images->isNotEmpty())
                                                 <div class="mt-3 grid grid-cols-2 gap-3">
                                                     @foreach ($comment->images as $image)
                                                         <img src="{{ asset('storage/' . $image->name) }}"
                                                             alt="Imagen del comentario"
-                                                            class="rounded-lg shadow-lg transform hover:scale-110 transition-all duration-300 cursor-pointer">
+                                                            class="rounded-lg shadow-lg transform hover:scale-110 transition-transform duration-300 cursor-pointer">
                                                     @endforeach
                                                 </div>
-                                            @endif --}}
+                                            @endif
 
                                             <p class="text-xs text-gray-400 mt-3">🕒
                                                 {{ $comment->created_at->diffForHumans() }}</p>
@@ -307,6 +307,7 @@
 
                                     <div class="mb-4">
                                         <input type="file" name="images[]" id="images-{{ $post->id }}" multiple
+                                            accept="image/*"
                                             class="w-full p-3 rounded-lg bg-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600 transition-all duration-300">
                                         <div id="image-preview-{{ $post->id }}" class="mt-3 grid grid-cols-3 gap-3">
                                         </div>

@@ -3,8 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Myuppercase;
-use App\Rules\Customlength;
+
 
 class StorePostRequest extends FormRequest
 {
@@ -28,7 +27,7 @@ class StorePostRequest extends FormRequest
             'url_clean' => 'required|string|max:500|unique:posts,url_clean,',
             'content' => 'required|string',
             'posted' => 'required|in:yes,not',
-            'category_id' => 'required|exists:categories,id', 
+            'category_id' => 'required|exists:categories,id',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ];

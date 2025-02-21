@@ -7,7 +7,6 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use App\Models\User;
 
 class PostController extends Controller
 {

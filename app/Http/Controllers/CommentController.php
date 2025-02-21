@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\Image;
-use App\Models\User;
-use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class CommentController extends Controller
 {
     public function index()
     {
-        $comments = Comment::all();
+        $comments = Comment::with('images')->get();
         return view('comments.index', compact('comments'));
     }
+
 
     public function create()
     {
@@ -24,8 +21,10 @@ class CommentController extends Controller
 
     public function show($id)
     {
+        $comment = Comment::with('images')->findOrFail($id);
         return view('comments.show', compact('comment'));
     }
+
 
     public function store(Request $request)
     {
@@ -45,10 +44,9 @@ class CommentController extends Controller
 
         // Subir múltiples imágenes
         if ($request->hasFile('images')) {
-            $images = $request->file('images');  // Obtener todas las imágenes
-            foreach ($images as $image) {
-                    $path = $image->store('comments',  'public');  // Almacenar imagen en el directorio 'comments'
-                    $comment->images()->create(['name' => $path, 'comment_id' => $comment->id]);
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('comments', 'public');
+                $comment->images()->create(['name' => $path]);
             }
         }
 
