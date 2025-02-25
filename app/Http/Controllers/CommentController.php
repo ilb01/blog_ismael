@@ -14,10 +14,11 @@ class CommentController extends Controller
     }
 
 
-    public function create()
-    {
-        return view('comments.create');
-    }
+    // No se usa
+    // public function create()
+    // {
+    //     return view('comments.create');
+    // }
 
     public function show($id)
     {
@@ -58,10 +59,11 @@ class CommentController extends Controller
         return redirect()->route('home');
     }
 
-    public function edit($id)
-    {
-        return view('comments.edit', ['comment' => Comment::findOrFail($id)]);
-    }
+    // No se usa
+    // public function edit($id)
+    // {
+    //     return view('comments.edit', ['comment' => Comment::findOrFail($id)]);
+    // }
 
     public function update(Request $request, Comment $comment)
     {

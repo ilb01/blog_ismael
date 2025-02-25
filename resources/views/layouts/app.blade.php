@@ -19,6 +19,7 @@
         /* Evita el desbordamiento horizontal */
         body {
             overflow-x: hidden;
+            
         }
 
         .container {
@@ -30,6 +31,7 @@
             width: 100%;
             max-width: 100%;
             table-layout: fixed;
+
         }
     </style>
 </head>

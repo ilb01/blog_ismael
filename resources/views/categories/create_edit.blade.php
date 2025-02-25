@@ -6,18 +6,18 @@
     </x-slot>
 
     <div class="container mx-auto px-6 py-6">
-        <h1 class="text-3xl font-bold text-white mb-6">{{ isset($category) ? 'Edit' : 'Create' }} Category</h1>
+        <h1 class="text-3xl font-bold dark:text-white mb-6">{{ isset($category) ? 'Edit' : 'Create' }} Category</h1>
 
         <!-- Formulario de creación y edición -->
         <form action="{{ isset($category) ? route('categories.update', $category->id) : route('categories.store') }}"
             method="POST">
             @csrf
             @if (isset($category))
-                @method('PUT') 
+                @method('PUT')
             @endif
-            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="dark:bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
-                    <label for="title" class="block text-white font-semibold">Title</label>
+                    <label for="title" class="block dark:text-white font-semibold">Title</label>
                     <input type="text" name="title" id="title"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('title', isset($category) ? $category->title : '') }}" required>
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="url_clean" class="block text-white font-semibold">Url Clean</label>
+                    <label for="url_clean" class="block dark:text-white font-semibold">Url Clean</label>
                     <input type="text" name="url_clean" id="url_clean"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('url_clean', isset($category) ? $category->url_clean : '') }}" required>

@@ -6,18 +6,17 @@
     </x-slot>
 
     <div class="container mx-auto px-6 py-6">
-        <h1 class="text-3xl font-bold text-white mb-6">{{ isset($tag) ? 'Edit' : 'Create' }} Tag</h1>
+        <h1 class="text-3xl font-bold dark:text-white mb-6">{{ isset($tag) ? 'Edit' : 'Create' }} Tag</h1>
 
         <!-- Formulario de creación y edición -->
-        <form action="{{ isset($tag) ? route('tags.update', $tag->id) : route('tags.store') }}"
-            method="POST">
+        <form action="{{ isset($tag) ? route('tags.update', $tag->id) : route('tags.store') }}" method="POST">
             @csrf
             @if (isset($tag))
                 @method('PUT')
             @endif
-            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="dark:bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
-                    <label for="name" class="block text-white font-semibold">Name</label>
+                    <label for="name" class="block dark:text-white font-semibold">Name</label>
                     <input type="text" name="name" id="name"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('name', isset($tag) ? $tag->name : '') }}" required>
@@ -27,7 +26,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="url_clean" class="block text-white font-semibold">Url Clean</label>
+                    <label for="url_clean" class="block dark:text-white font-semibold">Url Clean</label>
                     <input type="text" name="url_clean" id="url_clean"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('url_clean', isset($tag) ? $tag->url_clean : '') }}" required>

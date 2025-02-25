@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="container mx-auto px-6 py-6">
-        <h1 class="text-3xl font-bold text-white mb-6">{{ isset($post) ? 'Edit' : 'Create' }} Post</h1>
+        <h1 class="text-3xl font-bold dark:text-white mb-6">{{ isset($post) ? 'Edit' : 'Create' }} Post</h1>
 
         <!-- Formulario de creación y edición -->
         <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST">
@@ -14,9 +14,9 @@
             @if (isset($post))
                 @method('PUT')
             @endif
-            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="dark:bg-gray-800 p-6 rounded-lg shadow-lg">
                 <div class="mb-4">
-                    <label for="title" class="block text-white font-semibold">Title</label>
+                    <label for="title" class="block dark:text-white font-semibold">Title</label>
                     <input type="text" name="title" id="title"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('title', isset($post) ? $post->title : '') }}" required>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="url_clean" class="block text-white font-semibold">Url Clean</label>
+                    <label for="url_clean" class="block dark:text-white font-semibold">Url Clean</label>
                     <input type="text" name="url_clean" id="url_clean"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('url_clean', isset($post) ? $post->url_clean : '') }}" required>
@@ -35,7 +35,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="content" class="block text-white font-semibold">Content</label>
+                    <label for="content" class="block dark:text-white font-semibold">Content</label>
                     <input type="text" name="content" id="content"
                         class="w-full px-4 py-2 mt-2 bg-gray-700  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="{{ old('content', isset($post) ? $post->content : '') }}" required>
@@ -44,7 +44,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="posted" class="block text-white font-semibold">Posted</label>
+                    <label for="posted" class="block dark:text-white font-semibold">Posted</label>
                     <select name="posted" id="posted"
                         class="w-full px-4 py-2 mt-2 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required>
@@ -60,14 +60,15 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="block text-white font-semibold">Tags</label>
+                    <label class="block dark:text-white font-semibold">Tags</label>
                     <div class="mt-2 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
                         @foreach ($allTags as $tag)
-                            <label class="inline-flex items-center bg-gray-700 px-4 py-2 rounded-lg border border-gray-600 hover:border-blue-500 transition-colors">
+                            <label
+                                class="inline-flex items-center bg-gray-700 px-4 py-2 rounded-lg border border-gray-600 hover:border-blue-500 transition-colors">
                                 <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
                                     {{ in_array($tag->id, old('tags', isset($post) ? $post->tags->pluck('id')->toArray() : [])) ? 'checked' : '' }}
                                     class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500">
-                                <span class="ml-3 text-white">{{ $tag->name }}</span>
+                                <span class="ml-3 dark:text-white">{{ $tag->name }}</span>
                             </label>
                         @endforeach
                     </div>
@@ -76,7 +77,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="category_id" class="block text-white font-semibold">Category (ID)</label>
+                    <label for="category_id" class="block dark:text-white font-semibold">Category (ID)</label>
                     <select name="category_id" id="category_id"
                         class="w-full px-4 py-2 mt-2 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required>

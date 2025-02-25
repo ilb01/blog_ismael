@@ -262,7 +262,7 @@
                                                     @endforeach
                                                 </div>
                                             @endif
-                                            
+
                                             <p class="text-xs text-gray-400 mt-3">🕒
                                                 {{ $comment->created_at->diffForHumans() }}</p>
                                         </div>

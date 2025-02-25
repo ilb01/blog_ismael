@@ -6,14 +6,14 @@
     </x-slot>
     @if (session('success'))
         <div id="success-message"
-            class="flex items-center justify-between bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-4 rounded-lg shadow-xl mb-6 animate-fade-in transition-opacity duration-500 border-l-4 border-green-900">
+            class="flex items-center justify-between bg-gradient-to-r from-green-500 to-green-700 dark:text-white px-6 py-4 rounded-lg shadow-xl mb-6 animate-fade-in transition-opacity duration-500 border-l-4 border-green-900">
             <div class="flex items-center space-x-3">
                 <span class="text-2xl">✅</span>
                 <span class="font-semibold text-lg">{{ session('success') }}</span>
             </div>
             <button
                 onclick="document.getElementById('success-message').style.opacity='0'; setTimeout(() => document.getElementById('success-message').remove(), 500);"
-                class="focus:outline-none text-white hover:text-gray-200 transition text-xl">
+                class="focus:outline-none dark:text-white hover:text-gray-200 transition text-xl">
                 ✖
             </button>
         </div>
@@ -44,7 +44,7 @@
 
                 <div class="overflow-auto flex-grow w-full">
                     <table class="w-full min-h-full bg-white dark:bg-gray-800 rounded-lg shadow-lg table-fixed">
-                        <thead class="bg-gradient-to-r from-blue-900 to-blue-600 text-white">
+                        <thead class="bg-gradient-to-r from-blue-900 to-blue-600 dark:text-white">
                             <tr>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">ID
                                 </th>
@@ -60,16 +60,17 @@
                         </thead>
                         <tbody>
                             @foreach ($categories as $category)
-                                <tr class="border-b border-gray-600 hover:bg-gray-700 transition-all duration-300">
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                <tr
+                                    class="border-b border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         {{ $category->id }}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         {{ $category->title }}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         {{ $category->url_clean }}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         {{ $category->created_at }}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         <div class="flex justify-center space-x-6 gap-4">
                                             <!-- Botón de Ver (Show) -->
                                             <a href="{{ route('categories.show', $category->id) }}"

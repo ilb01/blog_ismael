@@ -6,14 +6,14 @@
     </x-slot>
     @if (session('success'))
         <div id="success-message"
-            class="flex items-center justify-between bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-4 rounded-lg shadow-xl mb-6 animate-fade-in transition-opacity duration-500 border-l-4 border-green-900">
+            class="flex items-center justify-between bg-gradient-to-r from-green-500 to-green-700 dark:text-white px-6 py-4 rounded-lg shadow-xl mb-6 animate-fade-in transition-opacity duration-500 border-l-4 border-green-900">
             <div class="flex items-center space-x-3">
                 <span class="text-2xl">✅</span>
                 <span class="font-semibold text-lg">{{ session('success') }}</span>
             </div>
             <button
                 onclick="document.getElementById('success-message').style.opacity='0'; setTimeout(() => document.getElementById('success-message').remove(), 500);"
-                class="focus:outline-none text-white hover:text-gray-200 transition text-xl">
+                class="focus:outline-none dark:text-white hover:text-gray-200 transition text-xl">
                 ✖
             </button>
         </div>
@@ -43,7 +43,7 @@
 
                 <div class="overflow-auto flex-grow w-full">
                     <table class="w-full min-h-full bg-white dark:bg-gray-800 rounded-lg shadow-lg table-fixed">
-                        <thead class="bg-gradient-to-r from-blue-900 to-blue-600 text-white">
+                        <thead class="bg-gradient-to-r from-blue-900 to-blue-600 dark:text-white">
                             <tr>
                                 <th class="px-6 py-4 text-lg font-semibold border-b-2 border-gray-600 text-center">ID
                                 </th>
@@ -67,41 +67,44 @@
                         </thead>
                         <tbody>
                             @foreach ($posts as $post)
-                                <tr class="border-b border-gray-600 hover:bg-gray-700 transition-all duration-300">
-                                    <td class="px-2 py-2 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                <tr
+                                    class="border-b border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300">
+                                    <td class="px-2 py-2 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         {{ $post->id }}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         <div style="margin-bottom: 0.2rem;">
                                             {{ $post->title }}
                                         </div>
                                         @if ($post->posted === 'yes')
-                                            <span style="background-color: green; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
+                                            <span
+                                                style="background-color: green; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
                                                 Publicado
                                             </span>
                                         @else
-                                            <span style="background-color: red; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
+                                            <span
+                                                style="background-color: red; color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem;">
                                                 No Publicado
                                             </span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         {{ $post->url_clean }}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         {!! $post->content !!}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         @foreach ($post->tags as $tag)
                                             <span class="bg-gray-500 text-white px-2 py-1 rounded-full text-sm">
                                                 {{ $tag->name }}
                                             </span>
                                         @endforeach
                                     </td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         {{ $post->category->title }} ({{ $post->category_id }})</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
-                                        {{ $post->user->name }} ({{$post->user_id}})</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
+                                        {{ $post->user->name }} ({{ $post->user_id }})</td>
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         {{ $post->created_at }}</td>
-                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 text-white">
+                                    <td class="px-6 py-4 text-center bg-blue-900 hover:bg-blue-700 dark:text-white">
                                         <div class="flex flex-col items-center space-y-6">
                                             <!-- Botón de Ver (Show) -->
                                             <a href="{{ route('posts.show', $post->id) }}"
